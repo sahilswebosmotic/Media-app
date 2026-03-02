@@ -1,0 +1,35 @@
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+
+import SignIn from '@pages/SignIn'
+import SignUp from '@pages/SignUp'
+import Home from '@pages/Home'
+import UserProfile from '@pages/UserProfile'
+import Layout from './layout/Layout'
+import ProtectedRoute from '@components/routes/ProtectedRoute'
+import PublicRoute from '@components/routes/PublicRoute'
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<PublicRoute />}>
+        {/* <Route> */}
+          <Route path='/' element={<SignIn />} />
+          <Route path='/signup' element={<SignUp />} />
+        </Route>
+
+        <Route element={<ProtectedRoute />}>
+        {/* <Route> */}
+          <Route element={<Layout />}>
+          <Route path='/home' element={<Home />} />
+          <Route path='/user-profile' element={<UserProfile />} />
+        </Route>
+        </Route>
+
+        <Route path='*' element={<Navigate to='/' replace />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+
+export default App
