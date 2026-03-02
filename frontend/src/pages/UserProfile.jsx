@@ -46,29 +46,30 @@ const UserProfile = () => {
 
   if (isError) {
     return (
-      <Container maxWidth="md">
-        <Alert severity="error">{error?.data?.message || 'Unable to load profile details.'}</Alert>
+      <Container maxWidth='md'>
+        <Alert severity='error'>{error?.data?.message || 'Unable to load profile details.'}</Alert>
       </Container>
     )
   }
 
   if (!currentUser) {
     return (
-      <Container maxWidth="md">
-        <Alert severity="warning">Profile data is not available.</Alert>
+      <Container maxWidth='md'>
+        <Alert severity='warning'>Profile data is not available.</Alert>
       </Container>
     )
   }
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth='md' sx={{ pb: 2 }}>
       <Card
         sx={{
           borderRadius: 5,
-          border: '1px solid rgba(255, 255, 255, 0.08)',
-          bgcolor: 'rgba(14, 23, 43, 0.82)',
-          backdropFilter: 'blur(10px)',
+          border: '1px solid rgba(148, 163, 184, 0.2)',
+          bgcolor: 'rgba(15, 23, 42, 0.84)',
+          backdropFilter: 'blur(14px)',
           overflow: 'hidden',
+          boxShadow: '0 24px 56px rgba(2, 6, 23, 0.42)',
         }}
       >
         <ProfileHeader isPrivate={currentUser?.isPrivate} />
@@ -126,5 +127,4 @@ const UserProfile = () => {
 }
 
 export default UserProfile
-
 

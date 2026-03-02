@@ -6,12 +6,10 @@ import { useGetUserImageQuery, useUpdateUserMutation } from '@store/slice/usersA
 import { defaultValues, profileSchema } from './profileFormSchema'
 
 const useUserProfilePage = () => {
-  const { data, isLoading, isError, error } = useGetCurrentUserQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-  })
-  const { data: userImageData } = useGetUserImageQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-  })
+  const { data, isLoading, isError, error } = useGetCurrentUserQuery()
+  // console.log(data);
+  const { data: userImageData } = useGetUserImageQuery()
+  console.log(data);
   const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation()
 
   const [isEditing, setIsEditing] = useState(false)
@@ -87,7 +85,9 @@ const useUserProfilePage = () => {
     setSuccessMessage('')
     setSubmitError('')
     setRemoveAvatar(false)
-    setValue('profilePhotoFile', file, { shouldValidate: true, shouldDirty: true })
+    setValue('profilePhotoFile', file, 
+      // { shouldValidate: true, shouldDirty: true }
+    )
     const nextPreview = URL.createObjectURL(file)
     clearPreview()
     setProfilePreview(nextPreview)

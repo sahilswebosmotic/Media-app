@@ -24,9 +24,15 @@ const editFieldSx = {
 }
 
 const readonlyFieldSx = {
+  '& .MuiInputLabel-root': {
+    color: 'rgba(203, 213, 225, 0.9)',
+  },
   '& .MuiOutlinedInput-root': {
     borderRadius: 2,
-    backgroundColor: 'rgba(148, 163, 184, 0.08)',
+    backgroundColor: 'rgba(15, 23, 42, 0.35)',
+    '& fieldset': {
+      borderColor: 'rgba(148, 163, 184, 0.22)',
+    },
   },
 }
 

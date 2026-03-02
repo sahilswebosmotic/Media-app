@@ -11,7 +11,7 @@ const FeedImage = ({ postId, title, hasImage }) => {
 
   if (isLoading) {
     return (
-      <Box sx={{ display: "grid", placeItems: "center", minHeight: 180 }}>
+      <Box sx={{ display: "grid", placeItems: "center", minHeight: 180, bgcolor: "rgba(2, 6, 23, 0.45)" }}>
         <CircularProgress size={22} />
       </Box>
     )
@@ -24,7 +24,7 @@ const FeedImage = ({ postId, title, hasImage }) => {
       component="img"
       image={data.imageData}
       alt={title}
-      sx={{ height: 220, objectFit: "cover" }}
+      sx={{ height: 220, objectFit: "cover", borderBottom: "1px solid rgba(148, 163, 184, 0.18)" }}
     />
   )
 }

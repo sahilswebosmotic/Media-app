@@ -2,14 +2,22 @@ import { Link, Typography } from "@mui/material";
 
 const AuthRedirectText = ({ prompt, linkLabel, onClick }) => {
     return (
-        <Typography variant="body2" textAlign="center" sx={{ mt: 1 }}>
+        <Typography variant="body2" textAlign="center" sx={{ mt: 1.4, color: "text.secondary" }}>
             {prompt}{" "}
             <Link
                 component="button"
                 variant="body2"
                 type="button"
                 onClick={onClick}
-                sx={{ cursor: "pointer", fontWeight: 600 }}
+                sx={{
+                    cursor: "pointer",
+                    fontWeight: 700,
+                    color: "primary.light",
+                    textDecoration: "none",
+                    "&:hover": {
+                        textDecoration: "underline",
+                    },
+                }}
             >
                 {linkLabel}
             </Link>

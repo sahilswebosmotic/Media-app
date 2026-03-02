@@ -11,14 +11,14 @@ const ProfileActions = ({
 }) => {
   if (!isEditing) {
     return (
-      <Button type="button" variant="contained" onClick={onEdit}>
+      <Button type="button" variant="contained" onClick={onEdit} sx={{ alignSelf: 'flex-start' }}>
         Edit Profile
       </Button>
     )
   }
 
   return (
-    <Stack direction="row" spacing={1.2}>
+    <Stack direction="row" spacing={1.2} flexWrap="wrap" useFlexGap>
       <Button type="submit" variant="contained" disabled={isUpdating || (!isDirty && !removeAvatar)}>
         {isUpdating ? 'Saving...' : 'Save Changes'}
       </Button>

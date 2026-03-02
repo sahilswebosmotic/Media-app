@@ -89,53 +89,26 @@ const SignUpForm = () => {
       <Stack component='form' onSubmit={handleSubmit(onSubmit)} noValidate spacing={1.6}>
         {errors.root?.apiError?.message && <Alert severity='error'>{errors.root.apiError.message}</Alert>}
 
-        {/* <TextField
-          label='Firstname'
-          fullWidth
-          {...register('firstname')}
-          error={Boolean(errors.firstname)}
-          helperText={errors.firstname?.message}
-        /> 
-
-        <TextField
-          label='Lastname'
-          fullWidth
-          {...register('lastname')}
-          error={Boolean(errors.lastname)}
-          helperText={errors.lastname?.message}
-        />
-
-        <TextField
-          label='Email'
-          type='email'
-          fullWidth
-          {...register('email')}
-          error={Boolean(errors.email)}
-          helperText={errors.email?.message}
-        />
-
-        <TextField
-          label='Username'
-          fullWidth
-          {...register('username')}
-          error={Boolean(errors.username)}
-          helperText={errors.username?.message}
-        />
-
-        <TextField
-          label='Password'
-          type='password'
-          fullWidth
-          {...register('password')}
-          error={Boolean(errors.password)}
-          helperText={errors.password?.message}
-        /> */}
 
         <AuthFieldList fields={SIGNUP_FIELDS} register={register} errors={errors} />
 
-        <FormControlLabel control={<Checkbox {...register('isPrivate')} />} label='Make account private' />
+        <FormControlLabel
+          control={<Checkbox {...register('isPrivate')} />}
+          label='Make account private'
+          sx={{
+            m: 0,
+            mt: 0.4,
+            '& .MuiFormControlLabel-label': { color: 'text.secondary', fontSize: '0.92rem' },
+          }}
+        />
 
-        <Button type='submit' variant='contained' size='large' disabled={isLoading} sx={{ mt: 1, py: 1.2 }}>
+        <Button
+          type='submit'
+          variant='contained'
+          size='large'
+          disabled={isLoading}
+          sx={{ mt: 1.2, py: 1.3, fontSize: '0.98rem' }}
+        >
           {isLoading ? 'Creating account...' : 'Sign Up'}
         </Button>
 

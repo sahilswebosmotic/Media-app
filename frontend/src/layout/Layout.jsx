@@ -12,11 +12,11 @@ const Layout = () => {
         display: 'flex',
         flexDirection: 'column',
         background:
-          'radial-gradient(circle at 10% -10%, rgba(94,160,255,0.15), transparent 35%), radial-gradient(circle at 100% 10%, rgba(56,189,248,0.1), transparent 30%), #0b1220',
+          'radial-gradient(circle at 8% -8%, rgba(56, 189, 248, 0.16), transparent 30%), radial-gradient(circle at 92% 12%, rgba(99, 102, 241, 0.18), transparent 33%), #050a16',
       }}
     >
       <Header />
-      <Box component="main" sx={{ flex: 1, py: { xs: 2, md: 3 } }}>
+      <Box component='main' sx={{ flex: 1, py: { xs: 2.5, md: 3.5 } }}>
         <Outlet />
       </Box>
       <Footer />

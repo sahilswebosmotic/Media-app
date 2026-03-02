@@ -2,32 +2,22 @@ import {
   AppBar,
   Container,
   Toolbar,
-  Typography,
-  Box,
-  IconButton,
-  Menu,
-  MenuItem,
-  Button,
-  Tooltip,
-  Avatar,
-  Divider,
 } from '@mui/material'
-import React from 'react'
+import { useState } from 'react'
 import { useAuth } from '@context/useAuth'
-import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom'
-
-const pages = [
-  { label: 'Home', path: '/home' },
-  { label: 'Profile', path: '/user-profile' },
-]
-const settings = ['Profile', 'Logout']
+import { useLocation, useNavigate } from 'react-router-dom'
+import AppBrand from './components/AppBrand'
+import MobileNavMenu from './components/MobileNavMenu'
+import DesktopNavLinks from './components/DesktopNavLinks'
+import UserMenu from './components/UserMenu'
+import { NAV_LINKS, USER_MENU_ACTIONS } from './navConfig'
 
 const Header = () => {
   const { logout, user } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
-  const [anchorElNav, setAnchorElNav] = React.useState(null)
-  const [anchorElUser, setAnchorElUser] = React.useState(null)
+  const [anchorElNav, setAnchorElNav] = useState(null)
+  const [anchorElUser, setAnchorElUser] = useState(null)
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
@@ -58,170 +48,41 @@ const Header = () => {
 
   return (
     <AppBar
-      position="static"
-      color="transparent"
-      elevation={24}
+      position='static'
+      color='transparent'
+      elevation={0}
       sx={{
         border: 1,
-        borderColor: 'white',
-        borderRadius:'2.5rem',
-        backdropFilter: 'blur(10px)',
-        margin:'auto',
-        marginTop:'2%',
-        maxWidth:'80%',
+        borderColor: 'rgba(148, 163, 184, 0.22)',
+        borderRadius: '1rem',
+        backdropFilter: 'blur(14px)',
+        bgcolor: 'rgba(15, 23, 42, 0.62)',
+        margin: 'auto',
+        marginTop: { xs: 1.5, md: 2 },
+        maxWidth: { xs: '94%', md: '86%' },
+        boxShadow: '0 18px 40px rgba(2, 6, 23, 0.35)',
       }}
     >
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Box
-            component="span"
-            sx={{ display: { xs: 'none', md: 'flex',color:'white' }, mr: 1, fontWeight: 700 }}
-          >
-            SM
-          </Box>
-          <Typography
-            variant="h6"
-            noWrap
-            component={RouterLink}
-            to="/home"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontWeight: 800,
-              letterSpacing: '.08rem',
-              color: 'white',
-              textDecoration: 'none',
-            }}
-          >
-            SOCIAL
-          </Typography>
+      <Container maxWidth='xl'>
+        <Toolbar disableGutters sx={{ minHeight: { xs: 62, md: 68 } }}>
+          <AppBrand />
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex',  md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <Typography component="span" sx={{ fontSize: 22, color:'white', lineHeight: 1 , fontWeight:900 }}>
-                |||
-              </Typography>
-            </IconButton>
-            <Menu
-              id="menu-nav-mobile"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{ display: { xs: 'block', md: 'none' } }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page.path} onClick={handleCloseNavMenu}>
-                  <Typography
-                    component={RouterLink}
-                    to={page.path}
-                    sx={{ textAlign: 'center', color: 'text.primary', textDecoration: 'none' }}
-                  >
-                    {page.label}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <Box
-            component="span"
-            sx={{ display: { xs: 'flex', md: 'none',color:'white' }, mr: 1, fontWeight: 700 }}
-          >
-            SM
-          </Box>
-          <Typography
-            variant="h5"
-            noWrap
-            component={RouterLink}
-            to="/home"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontWeight: 800,
-              letterSpacing: '.08rem',
-              color: 'white',
-              textDecoration: 'none',
-            }}
-          >
-            SOCIAL
-          </Typography>
-          <Box sx={{ flexGrow: 1, 
-            display: { xs: 'none', md: 'flex' }
-              }}>
-            {pages.map((page) => (
-              <Button
-                key={page.path}
-                component={RouterLink}
-                to={page.path}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  px: 1.6,
-                  color: location.pathname === page.path ? 'primary.main' : 'text.primary',
-                  display: 'block',
-                  borderRadius: 2,
-                }}
-              >
-                {page.label}
-              </Button>
-            ))}
-          </Box>
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar>
-                  {(user?.firstname?.[0] || 'U').toUpperCase()}
-                </Avatar>
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-user"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <Box sx={{ px: 2, py: 1 }}>
-                <Typography variant="subtitle2">
-                  {user ? `${user.firstname} ${user.lastname}` : 'Guest User'}
-                </Typography>
-                <Typography variant="caption" color="text.secondary">
-                  @{user?.username || 'guest'}
-                </Typography>
-              </Box>
-              <Divider />
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={() => handleUserAction(setting)}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+          <MobileNavMenu
+            links={NAV_LINKS}
+            anchorEl={anchorElNav}
+            onOpen={handleOpenNavMenu}
+            onClose={handleCloseNavMenu}
+          />
+          <AppBrand mobile />
+          <DesktopNavLinks links={NAV_LINKS} pathname={location.pathname} />
+          <UserMenu
+            user={user}
+            actions={USER_MENU_ACTIONS}
+            anchorEl={anchorElUser}
+            onOpen={handleOpenUserMenu}
+            onClose={handleCloseUserMenu}
+            onAction={handleUserAction}
+          />
         </Toolbar>
       </Container>
     </AppBar>

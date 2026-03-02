@@ -57,32 +57,15 @@ const SignInForm = () => {
       <Stack component='form' onSubmit={handleSubmit(onSubmit)} noValidate spacing={1.6}>
         {errors.root?.apiError?.message && <Alert severity='error'>{errors.root.apiError.message}</Alert>}
 
-        {/* <FormInput
-          label='Email'
-          type='email'
-          fullWidth
-          {...register('email')}
-          error={Boolean(errors.email)}
-          helperText={errors.email?.message}
-        />
-
-        {/* <FormInput
-        label=
-        /> 
-
-        <TextField
-          label='Password'
-          type='password'
-          fullWidth
-          {...register('password')}
-          error={Boolean(errors.password)}
-          helperText={errors.password?.message}
-        /> */}
-
         <AuthFieldList fields={LOGIN_FIELDS} register={register} errors={errors} />
 
-
-        <Button type='submit' variant='contained' size='large' disabled={isLoading} sx={{ mt: 1, py: 1.2 }}>
+        <Button
+          type='submit'
+          variant='contained'
+          size='large'
+          disabled={isLoading}
+          sx={{ mt: 1.2, py: 1.3, fontSize: '0.98rem' }}
+        >
           {isLoading ? 'Signing In...' : 'Sign In'}
         </Button>
 

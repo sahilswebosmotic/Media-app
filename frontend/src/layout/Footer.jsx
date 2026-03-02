@@ -1,55 +1,37 @@
-import { Box, Container, Link, Stack, Typography } from '@mui/material'
+import { Box, Container, Stack, Typography } from '@mui/material'
 import React from 'react'
-import { Link as RouterLink } from 'react-router-dom'
+import FooterLinks from './components/FooterLinks'
+import { NAV_LINKS } from './navConfig'
 
 const Footer = () => {
   const year = new Date().getFullYear()
 
   return (
     <Box
-      component="footer"
+      component='footer'
       sx={{
         mt: 4,
         py: { xs: 2.5, sm: 3 },
         borderTop: 1,
-        borderColor: 'divider',
-        bgcolor: 'rgba(18, 26, 43, 0.75)',
-        backdropFilter: 'blur(6px)',
+        borderColor: 'rgba(148, 163, 184, 0.2)',
+        bgcolor: 'rgba(15, 23, 42, 0.74)',
+        backdropFilter: 'blur(10px)',
       }}
     >
-      <Container maxWidth="xl">
+      <Container maxWidth='xl'>
         <Stack
           direction={{ xs: 'column', sm: 'row' }}
-          spacing={1.5}
+          spacing={1.8}
           alignItems={{ xs: 'flex-start', sm: 'center' }}
-          justifyContent="space-between"
+          justifyContent='space-between'
         >
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant='body2' color='text.secondary'>
             Social Media Platform
           </Typography>
 
-          <Stack direction="row" spacing={2}>
-            <Link
-              component={RouterLink}
-              to="/home"
-              underline="hover"
-              color="text.secondary"
-              variant="body2"
-            >
-              Home
-            </Link>
-            <Link
-              component={RouterLink}
-              to="/user-profile"
-              underline="hover"
-              color="text.secondary"
-              variant="body2"
-            >
-              Profile
-            </Link>
-          </Stack>
+          <FooterLinks links={NAV_LINKS} />
 
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant='body2' color='text.secondary'>
             (c) {year} All rights reserved.
           </Typography>
         </Stack>

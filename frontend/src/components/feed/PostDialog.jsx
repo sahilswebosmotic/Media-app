@@ -3,8 +3,20 @@ import FeedImage from "./FeedImage"
 
 const PostDialog = ({ post, onClose }) => {
   return (
-    <Dialog open={Boolean(post)} onClose={onClose} fullWidth maxWidth="sm">
-      <DialogTitle>{post?.title}</DialogTitle>
+    <Dialog
+      open={Boolean(post)}
+      onClose={onClose}
+      fullWidth
+      maxWidth="sm"
+      PaperProps={{
+        sx: {
+          borderRadius: 3,
+          border: "1px solid rgba(148, 163, 184, 0.2)",
+          bgcolor: "rgba(15, 23, 42, 0.96)",
+        },
+      }}
+    >
+      <DialogTitle sx={{ pb: 1.2, fontWeight: 800 }}>{post?.title}</DialogTitle>
 
       <DialogContent dividers>
         {post && (
@@ -17,21 +29,21 @@ const PostDialog = ({ post, onClose }) => {
               />
             )}
 
-            <Typography>{post.description}</Typography>
+            <Typography color="text.secondary">{post.description || "No description provided."}</Typography>
 
-            <Typography variant="caption">
+            <Typography variant="caption" color="text.secondary">
               @{post.userData?.username}
             </Typography>
 
-            <Typography variant="caption">
+            <Typography variant="caption" color={post.isPrivate ? "warning.main" : "info.main"}>
               {post.isPrivate ? "Private Post" : "Public Post"}
             </Typography>
           </Stack>
         )}
       </DialogContent>
 
-      <DialogActions>
-        <Button onClick={onClose}>Close</Button>
+      <DialogActions sx={{ p: 2 }}>
+        <Button variant="outlined" onClick={onClose}>Close</Button>
       </DialogActions>
     </Dialog>
   )
