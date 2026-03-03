@@ -1,7 +1,7 @@
 
 import { Box, Stack, Typography, Button, CircularProgress, Alert ,useMediaQuery,
   useTheme, } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useGetFeedPostsQuery } from "@store/slice/postsApi"
 import { useGetCurrentUserQuery } from "@store/slice/authApi"
 import FeedGrid from "./FeedGrid"
@@ -14,7 +14,7 @@ const Feed = () => {
   const isSmDown = useMediaQuery(theme.breakpoints.down('sm'))
   const [selectedPost, setSelectedPost] = useState(null)
   const [isCreateOpen, setIsCreateOpen] = useState(false)
-
+  const [posts,setPosts] = useState([])
   const { data, isLoading, isError, error } = useGetFeedPostsQuery({
     page: 1,
     perPage: 30,
@@ -24,8 +24,14 @@ const Feed = () => {
   const { data: currentUserData } = useGetCurrentUserQuery()
   const currentUserId = currentUserData?.data?.userId
 
-  const posts = data?.data?.data ?? []
+  useEffect(()=>{
+    setPosts(data?.data?.data ?? [])
+  },[data])
 
+  const handleDeletePost = (post) => {
+    // remove the post from ui only 
+    setPosts(posts.filter((p) => p._id !== post._id))
+  }
 
 
   if (isLoading) {
@@ -63,6 +69,7 @@ const Feed = () => {
         posts={posts}
         cols={cols}
         onOpenPost={setSelectedPost}
+        onDeletePost={handleDeletePost}
       />
 
       <PostDialog

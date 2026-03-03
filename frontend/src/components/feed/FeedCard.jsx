@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography, Button, Stack, Chip } from "@mui/material"
 import FeedImage from "./FeedImage"
 
-const FeedCard = ({ post, onOpen  }) => {
+const FeedCard = ({ post, onOpen ,onDelete  }) => {
   return (
     <Card
       sx={{
@@ -44,6 +44,9 @@ const FeedCard = ({ post, onOpen  }) => {
 
         <Button variant="outlined" onClick={() => onOpen(post)} sx={{ alignSelf: "flex-start", mt: 0.5 }}>
           Open
+        </Button>
+        <Button variant="outlined" onClick={() => onDelete(post)} sx={{ alignSelf: "flex-start", mt: 0.5 }}>
+          Delete
         </Button>
         </Stack>
       </CardContent>

@@ -1,4 +1,4 @@
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Stack, Typography } from "@mui/material"
+import { Dialog, DialogTitle, DialogContent, DialogActions,Chip, Button, Stack, Typography } from "@mui/material"
 import FeedImage from "./FeedImage"
 
 const PostDialog = ({ post, onClose }) => {
@@ -31,13 +31,18 @@ const PostDialog = ({ post, onClose }) => {
 
             <Typography  sx={{whiteSpace : 'normal' ,wordBreak:'break-word'}} color="text.secondary">{post.description || "No description provided."}</Typography>
 
-            <Typography variant="caption"  color="text.secondary">
-              @{post.userData?.username}
-            </Typography>
-
-            <Typography variant="caption" color={post.isPrivate ? "warning.main" : "info.main"}>
-              {post.isPrivate ? "Private Post" : "Public Post"}
-            </Typography>
+            <Stack direction="row" alignItems="center" justifyContent="space-between">
+          <Typography variant="caption" color="text.secondary">
+          @{post.userData?.username}
+        </Typography>
+          <Chip
+            size="small"
+            label={post.isPrivate ? "Private" : "Public"}
+            color={post.isPrivate ? "warning" : "info"}
+            variant="outlined"
+            sx={{ height: 22 }}
+          />
+        </Stack>
           </Stack>
         )}
       </DialogContent>

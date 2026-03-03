@@ -1,7 +1,7 @@
 import { ImageList, ImageListItem } from "@mui/material"
 import FeedCard from "./FeedCard"
 
-const FeedGrid = ({ posts, cols, onOpenPost  }) => {
+const FeedGrid = ({ posts, cols, onOpenPost ,onDeletePost }) => {
   return (
     <ImageList
       variant="masonry"
@@ -14,7 +14,7 @@ const FeedGrid = ({ posts, cols, onOpenPost  }) => {
     >
       {posts.map((post) => (
         <ImageListItem key={post._id}>
-          <FeedCard post={post} onOpen={onOpenPost} />
+          <FeedCard post={post} onOpen={onOpenPost} onDelete={onDeletePost} />
         </ImageListItem>
       ))}
     </ImageList>
