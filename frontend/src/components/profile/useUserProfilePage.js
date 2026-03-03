@@ -89,7 +89,6 @@ const useUserProfilePage = () => {
     setSubmitError('')
     setRemoveAvatar(false)
     setValue('profilePhotoFile', file, 
-      // { shouldValidate: true, shouldDirty: true }
     )
     const nextPreview = URL.createObjectURL(file)
     clearPreview()

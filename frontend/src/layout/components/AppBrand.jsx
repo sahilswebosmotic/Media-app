@@ -7,11 +7,11 @@ const AppBrand = ({ mobile = false }) => {
   return (
     <>
       <Box component='span' sx={{ display, color: 'primary.light', mr: 1, fontWeight: 800 }}>
-        SM
+        <img src="" alt="" />
       </Box>
       <Typography
         variant={mobile ? 'h5' : 'h6'}
-        noWrap
+        noWrap 
         component={RouterLink}
         to='/home'
         sx={{

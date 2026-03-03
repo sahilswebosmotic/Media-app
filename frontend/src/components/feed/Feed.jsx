@@ -1,5 +1,6 @@
 
-import { Box, Stack, Typography, Button, CircularProgress, Alert } from "@mui/material"
+import { Box, Stack, Typography, Button, CircularProgress, Alert ,useMediaQuery,
+  useTheme, } from "@mui/material"
 import { useState } from "react"
 import { useGetFeedPostsQuery } from "@store/slice/postsApi"
 import { useGetCurrentUserQuery } from "@store/slice/authApi"
@@ -8,6 +9,9 @@ import PostDialog from "./PostDialog"
 import CreatePostDialog from './CreatePostDialog/CreatePostDialog';
 
 const Feed = () => {
+  const theme = useTheme()
+  const isMdDown = useMediaQuery(theme.breakpoints.down('md'))
+  const isSmDown = useMediaQuery(theme.breakpoints.down('sm'))
   const [selectedPost, setSelectedPost] = useState(null)
   const [isCreateOpen, setIsCreateOpen] = useState(false)
 
@@ -15,7 +19,8 @@ const Feed = () => {
     page: 1,
     perPage: 30,
   })
-
+  const cols = isSmDown ? 1 :isMdDown ?3 :4
+  
   const { data: currentUserData } = useGetCurrentUserQuery()
   const currentUserId = currentUserData?.data?.userId
 
@@ -56,7 +61,7 @@ const Feed = () => {
 
       <FeedGrid
         posts={posts}
-        cols={4}
+        cols={cols}
         onOpenPost={setSelectedPost}
       />
 

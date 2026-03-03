@@ -13,6 +13,7 @@ import AuthFormCard from './AuthFormCard'
 import AuthRedirectText from './AuthRedirectText'
 import { useSignUpMutation } from '@store/slice/authApi'
 import AuthFieldList from './AuthFieldList'
+import { useToast } from '../../context/toast/useToast'
 
 const signUpSchema = yup.object({
   firstname: yup
@@ -54,7 +55,7 @@ const defaultValues = {
 const SignUpForm = () => {
   const navigate = useNavigate()
   const [signUpUser, { isLoading }] = useSignUpMutation()
-
+  const {showSuccess} = useToast();
   const {
     register,
     handleSubmit,
@@ -68,6 +69,7 @@ const SignUpForm = () => {
   const onSubmit = async (values) => {
     try {
       await signUpUser(values).unwrap()
+      showSuccess("Signup successful. Please login.");
       navigate('/')
     } catch (error) {
       setError('root.apiError', {
@@ -87,7 +89,7 @@ const SignUpForm = () => {
   return (
     <AuthFormCard title='Sign Up' subtitle='Create your account'>
       <Stack component='form' onSubmit={handleSubmit(onSubmit)} noValidate spacing={1.6}>
-        {errors.root?.apiError?.message && <Alert severity='error'>{errors.root.apiError.message}</Alert>}
+        {errors.root?.apiError?.message && <Alert severity='error' variant="filled">{errors.root.apiError.message}</Alert>}
 
 
         <AuthFieldList fields={SIGNUP_FIELDS} register={register} errors={errors} />

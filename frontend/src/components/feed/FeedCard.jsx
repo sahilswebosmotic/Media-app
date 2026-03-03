@@ -24,7 +24,7 @@ const FeedCard = ({ post, onOpen  }) => {
         </Typography>
 
         {post.description && (
-          <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.5 }}>
+          <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.5 ,whiteSpace : 'normal' ,overflow :'hidden'}}>
             {post.description}
           </Typography>
         )}

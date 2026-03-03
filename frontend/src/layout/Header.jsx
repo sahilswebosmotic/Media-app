@@ -4,7 +4,7 @@ import {
   Toolbar,
 } from '@mui/material'
 import { useState } from 'react'
-import { useAuth } from '@context/useAuth'
+import { useAuth } from '@context/auth/useAuth'
 import { useLocation, useNavigate } from 'react-router-dom'
 import AppBrand from './components/AppBrand'
 import MobileNavMenu from './components/MobileNavMenu'

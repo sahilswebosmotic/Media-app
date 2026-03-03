@@ -13,7 +13,8 @@ import { useCreatePostMutation } from "@store/slice/postsApi"
 import { createPostSchema, postDefaultValues } from "./postValidation"
 import PostImageUpload from "./PostImageUpload"
 import FormInput from "@components/common/FormInput"
-
+import { useToast } from "@context/toast/useToast"
+ 
 const buildCreatePostFormData = (values) => {
   const formData = new FormData()
   formData.append("title", values.title)
@@ -32,7 +33,7 @@ const buildCreatePostFormData = (values) => {
 
 const CreatePostForm = ({ onClose }) => {
   const [createPost, { isLoading }] = useCreatePostMutation()
-
+  const {showSuccess} = useToast();
   const {
     control,
     register,
@@ -50,6 +51,7 @@ const CreatePostForm = ({ onClose }) => {
       await createPost(buildCreatePostFormData(values)).unwrap()
       reset(postDefaultValues)
       onClose()
+      showSuccess("Post created successfully.");
     } catch (err) {
       setError("root.apiError", {
         message: err?.data?.message || "Unable to create post.",

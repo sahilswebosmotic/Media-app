@@ -29,9 +29,9 @@ const PostDialog = ({ post, onClose }) => {
               />
             )}
 
-            <Typography color="text.secondary">{post.description || "No description provided."}</Typography>
+            <Typography  sx={{whiteSpace : 'normal' ,wordBreak:'break-word'}} color="text.secondary">{post.description || "No description provided."}</Typography>
 
-            <Typography variant="caption" color="text.secondary">
+            <Typography variant="caption"  color="text.secondary">
               @{post.userData?.username}
             </Typography>
 

@@ -1,13 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Alert, Button, Stack } from '@mui/material'
 import { useLoginMutation } from '@store/slice/authApi'
-import { useAuth } from '@context/useAuth'
+import { useAuth } from '@context/auth/useAuth'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
 import AuthFormCard from './AuthFormCard'
 import AuthRedirectText from './AuthRedirectText'
 import AuthFieldList from './AuthFieldList'
+import useToast from '@context/toast/useToast'
+
 
 const signInSchema = yup.object({
   email: yup.string().email('Enter a valid email.').required('Email is required.'),
@@ -23,6 +25,7 @@ const SignInForm = () => {
   const navigate = useNavigate()
   const { login } = useAuth()
   const [loginUser, { isLoading }] = useLoginMutation()
+  const { showSuccess } = useToast();
 
   const {
     register,
@@ -38,6 +41,7 @@ const SignInForm = () => {
     try {
       const response = await loginUser(values).unwrap()
       login(response)
+      showSuccess(`Welcome back!`);
       navigate('/home')
     } catch (error) {
       setError('root.apiError', {

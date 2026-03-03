@@ -4,7 +4,8 @@ import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
 import { Provider } from 'react-redux'
 import App from './App.jsx'
 import { store } from '@store/store'
-import { AuthProvider } from '@context/AuthContext'
+import { AuthProvider } from './context/auth/AuthContext'
+import { ToastProvider } from './context/toast/ToastProvider.jsx'
 
 const darkTheme = createTheme({
   palette: {
@@ -101,6 +102,7 @@ const darkTheme = createTheme({
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <ToastProvider>
     <Provider store={store}>
       <AuthProvider>
         <ThemeProvider theme={darkTheme}>
@@ -109,5 +111,6 @@ createRoot(document.getElementById('root')).render(
         </ThemeProvider>
       </AuthProvider>
     </Provider>
+    </ToastProvider>
   </StrictMode>,
 )

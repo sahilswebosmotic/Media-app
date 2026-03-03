@@ -1,12 +1,12 @@
 import React from 'react'
-import { Alert } from '@mui/material'
-
+import { useToast } from '../../context/toast/useToast'
 const ProfileFeedback = ({ successMessage, submitError, fileErrorMessage }) => {
+  const { showError, showSuccess } = useToast();
   return (
     <>
-      {successMessage && <Alert severity="success" variant="filled">{successMessage}</Alert>}
-      {submitError && <Alert severity="error" variant="filled">{submitError}</Alert>}
-      {fileErrorMessage && <Alert severity="error" variant="filled">{fileErrorMessage}</Alert>}
+      {successMessage && showSuccess(successMessage)}
+      {submitError && showError(submitError)}
+      {fileErrorMessage && showError(fileErrorMessage)}
     </>
   )
 }

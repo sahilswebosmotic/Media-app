@@ -17,7 +17,7 @@ const MobileNavMenu = ({ links, anchorEl, onOpen, onClose }) => {
           px: 1.1,
         }}
       >
-        <Typography component='span' sx={{ fontSize: 20, color: 'text.primary', lineHeight: 1, fontWeight: 800 }}>
+        <Typography component='span' sx={{ fontSize: 12, color: 'text.primary', lineHeight: 1, fontWeight: 800 }}>
           Menu
         </Typography>
       </IconButton>
