@@ -48,7 +48,7 @@ const Header = () => {
 
   return (
     <AppBar
-      position='static'
+      position='sticky'
       color='transparent'
       elevation={0}
       sx={{

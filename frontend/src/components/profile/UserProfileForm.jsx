@@ -1,11 +1,11 @@
 import React from 'react'
 import { Alert, Box, Card, CardContent, CircularProgress, Container, Grid, Stack } from '@mui/material'
-import ProfileAvatarSection from '@components/profile/ProfileAvatarSection'
-import ProfileActions from '@components/profile/ProfileActions'
-import ProfileDetailsSection from '@components/profile/ProfileDetailsSection'
-import ProfileFeedback from '@components/profile/ProfileFeedback'
-import ProfileHeader from '@components/profile/ProfileHeader'
-import useUserProfilePage from '@components/profile/useUserProfilePage'
+import ProfileAvatarSection from './ProfileAvatarSection'
+import ProfileActions from './ProfileActions'
+import ProfileDetailsSection from './ProfileDetailsSection'
+import ProfileFeedback from './ProfileFeedback'
+import ProfileHeader from './ProfileHeader'
+import useUserProfilePage from './useUserProfilePage'
 
 const UserProfileForm = () => {
   const {
@@ -51,7 +51,7 @@ const UserProfileForm = () => {
       </Container>
     )
   }
-
+    
   if (!currentUser) {
     return (
       <Container maxWidth='md'>
@@ -83,7 +83,7 @@ const UserProfileForm = () => {
             />
 
             <Grid container spacing={3}>
-              <Grid size={{ xs: 12, md: 4 }}>
+              <Grid item xs={12} md={4}>
                 <ProfileAvatarSection
                   avatarSource={avatarSource}
                   avatarAlt={avatarAlt}
@@ -98,7 +98,7 @@ const UserProfileForm = () => {
                 />
               </Grid>
 
-              <Grid size={{ xs: 12, md: 8 }}>
+              <Grid item xs={12} md={8}>
                 <ProfileDetailsSection
                   isEditing={isEditing}
                   register={register}

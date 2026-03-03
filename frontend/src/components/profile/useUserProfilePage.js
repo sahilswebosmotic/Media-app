@@ -15,14 +15,14 @@ const useUserProfilePage = () => {
   const [removeAvatar, setRemoveAvatar] = useState(false)
   const [successMessage, setSuccessMessage] = useState('')
   const [submitError, setSubmitError] = useState('')
-
   const currentUser = useMemo(() => data?.data ?? null, [data])
+  // const currentUser = data?.data ?? null
   const profileValues = useMemo(
     () => ({
       firstname: currentUser?.firstname ?? '',
       lastname: currentUser?.lastname ?? '',
       username: currentUser?.username ?? '',
-      profilePhotoFile: null,
+      profilePhotoFile: currentUser?.profilePhotoFile || null,
     }),
     [currentUser]
   )
@@ -42,13 +42,13 @@ const useUserProfilePage = () => {
   const watchedFirstname = useWatch({ control, name: 'firstname' })
   const watchedLastname = useWatch({ control, name: 'lastname' })
   const watchedFile = useWatch({ control, name: 'profilePhotoFile' })
-  const watchedUserName = useWatch({ control, name:'username'})
+  const watchedUserName = useWatch({ control, name: 'username' })
 
   const hasStoredAvatar = Boolean(userImageData?.imageData)
   const avatarSource = removeAvatar ? undefined : profilePreview || userImageData?.imageData || undefined
-  
+
   const avatarAlt = isEditing
-    ? `${watchedFirstname || ''} ${watchedLastname || ''} ${watchedUserName || ''}` .trim()
+    ? `${watchedFirstname || ''} ${watchedLastname || ''} ${watchedUserName || ''}`.trim()
     : `${profileValues.firstname} ${profileValues.lastname} ${profileValues.username}`.trim()
 
   const displayName = `${isEditing ? watchedFirstname || '' : profileValues.firstname} 
@@ -88,8 +88,7 @@ const useUserProfilePage = () => {
     setSuccessMessage('')
     setSubmitError('')
     setRemoveAvatar(false)
-    setValue('profilePhotoFile', file, 
-    )
+    setValue('profilePhotoFile', file, { shouldDirty: true, shouldValidate: true })
     const nextPreview = URL.createObjectURL(file)
     clearPreview()
     setProfilePreview(nextPreview)
@@ -106,6 +105,7 @@ const useUserProfilePage = () => {
   const onSubmit = async (values) => {
     setSuccessMessage('')
     setSubmitError('')
+    // console.log(values);
     const payload = new FormData()
     payload.append('firstname', values.firstname)
     payload.append('lastname', values.lastname)
@@ -116,7 +116,6 @@ const useUserProfilePage = () => {
     } else if (removeAvatar) {
       payload.append('profilePhoto', '')
     }
-
     try {
       await updateUser(payload).unwrap()
       clearPreview()

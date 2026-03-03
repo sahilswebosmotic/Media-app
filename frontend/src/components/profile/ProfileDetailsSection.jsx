@@ -61,7 +61,7 @@ const ProfileDetailsSection = ({
             Update Information
           </Typography>
           <Grid container spacing={1.5}>
-            <Grid size={{ xs: 12, sm: 6 }}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 label="First Name"
                 fullWidth
@@ -71,7 +71,7 @@ const ProfileDetailsSection = ({
                 sx={editFieldSx}
               />
             </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 label="Last Name"
                 fullWidth
@@ -81,7 +81,7 @@ const ProfileDetailsSection = ({
                 sx={editFieldSx}
               />
             </Grid>
-            <Grid size={{ xs: 12 }}>
+            <Grid item xs={12}>
               <TextField
                 label="Username"
                 fullWidth
@@ -106,13 +106,13 @@ const ProfileDetailsSection = ({
       <Divider sx={{ borderColor: 'rgba(255,255,255,0.08)' }} />
 
       <Grid container spacing={1.5}>
-        <Grid size={{ xs: 12, sm: 6 }}>
+        <Grid item xs={12} sm={6}>
           <Typography variant="caption" color="text.secondary">
             Joined On
           </Typography>
           <Typography variant="body2">{formatDate(createdAt)}</Typography>
         </Grid>
-        <Grid size={{ xs: 12, sm: 6 }}>
+        <Grid item xs={12} sm={6}>
           <Typography variant="caption" color="text.secondary">
             Last Updated
           </Typography>

@@ -19,11 +19,10 @@ const Feed = () => {
     page: 1,
     perPage: 30,
   })
-  const cols = isSmDown ? 1 :isMdDown ?3 :4
+  const width = isSmDown ? "100%" :isMdDown ?"70%" :"60%"
   
   const { data: currentUserData } = useGetCurrentUserQuery()
-  const currentUserId = currentUserData?.data?.userId
-
+  const currentUserId = currentUserData?.data?._id
   useEffect(()=>{
     setPosts(data?.data?.data ?? [])
   },[data])
@@ -67,9 +66,10 @@ const Feed = () => {
 
       <FeedGrid
         posts={posts}
-        cols={cols}
+        width={width}
         onOpenPost={setSelectedPost}
         onDeletePost={handleDeletePost}
+        currentUserId={currentUserId}
       />
 
       <PostDialog

@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography, Button, Stack, Chip } from "@mui/material"
 import FeedImage from "./FeedImage"
 
-const FeedCard = ({ post, onOpen ,onDelete  }) => {
+const FeedCard = ({ post, onOpen ,onDelete,currentUserId  }) => {
   return (
     <Card
       sx={{
@@ -41,13 +41,20 @@ const FeedCard = ({ post, onOpen ,onDelete  }) => {
             sx={{ height: 22 }}
           />
         </Stack>
+          <Typography variant="caption" color="text.secondary">
+          {post.createdAt.slice(0,10)} 
+        </Typography>
 
+        <Stack direction="row" spacing={1}>
         <Button variant="outlined" onClick={() => onOpen(post)} sx={{ alignSelf: "flex-start", mt: 0.5 }}>
           Open
         </Button>
-        <Button variant="outlined" onClick={() => onDelete(post)} sx={{ alignSelf: "flex-start", mt: 0.5 }}>
-          Delete
-        </Button>
+        {post.userId === currentUserId && (
+          <Button variant="outlined" onClick={() => onDelete(post)} sx={{ alignSelf: "flex-start", mt: 0.5 }}>
+            Delete
+          </Button>
+        )}
+        </Stack>
         </Stack>
       </CardContent>
     </Card>

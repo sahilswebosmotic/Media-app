@@ -3,7 +3,7 @@ import UserProfileForm from '../components/profile/UserProfileForm'
 
 const UserProfile = () => {
     return (
-        <UserProfileForm />
+            <UserProfileForm />
     )
 }
 

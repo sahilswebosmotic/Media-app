@@ -5,10 +5,13 @@ const ProfileActions = ({
   isEditing,
   isUpdating,
   isDirty,
-  removeAvatar,
-  onEdit,
+  removeAvatar, 
+  onEdit, 
   onCancel,
 }) => {
+
+  
+
   if (!isEditing) {
     return (
       <Button type="button" variant="contained" onClick={onEdit} sx={{ alignSelf: 'flex-start' }}>
@@ -17,9 +20,11 @@ const ProfileActions = ({
     )
   }
 
+  const hasChanges = isDirty || removeAvatar
+
   return (
     <Stack direction="row" spacing={1.2} flexWrap="wrap" useFlexGap>
-      <Button type="submit" variant="contained" >
+      <Button type="submit" variant="contained"  disabled={!hasChanges || isUpdating}>
         {isUpdating ? 'Saving...' : 'Save Changes'}
       </Button>
       <Button type="button" variant="outlined" onClick={onCancel} disabled={isUpdating}>

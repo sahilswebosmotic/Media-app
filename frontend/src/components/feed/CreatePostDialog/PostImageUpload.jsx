@@ -46,6 +46,11 @@ const PostImageUpload = ({ error, value, onChange }) => {
           }}
         />
       )}
+      {previewUrl && (
+        <Button variant="outlined" onClick={() => onChange(null)} sx={{ alignSelf: "flex-start" }}>
+          Remove Image
+        </Button>
+      )}
     </>
   )
 }
