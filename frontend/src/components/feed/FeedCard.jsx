@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography, Button, Stack, Chip } from "@mui/material"
 import FeedImage from "./FeedImage"
 
-const FeedCard = ({ post, onOpen }) => {
+const FeedCard = ({ post, onOpen  }) => {
   return (
     <Card
       sx={{

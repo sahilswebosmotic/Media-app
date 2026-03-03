@@ -45,20 +45,31 @@ const getFeedPost = async (req, res, next) => {
     page = page && page > 0 ? Number(page) - 1 : 0;
     perPage = perPage && perPage > 0 ? perPage : 5;
 
-    let searchQuery = { isPrivate: false };
-    if (search) {
-      searchQuery.title = {
-        $regex: req.query.search,
-        $options: "i",
+    let searchQuery = {
+      $or: [{ isPrivate: false }, { userId: new Types.ObjectId(req.user._id) }],
+    };
+
+    if (req.query.isMyPostsOnly && req.query.isMyPostsOnly === "true") {
+      searchQuery = { userId: new Types.ObjectId(req.user._id) };
+    }
+
+    if (req.query.isPrivate) {
+      searchQuery = {
+        userId: new Types.ObjectId(req.user._id),
+        isPrivate: req.query.isPrivate == "true",
       };
     }
-    if (req.query.isMyPostsOnly && req.query.isMyPostsOnly === "true") {
-      const userId = req.user._id;
-      searchQuery.userId = new Types.ObjectId(userId);
+
+    if (search) {
+      searchQuery = {
+        ...searchQuery,
+        title: {
+          $regex: req.query.search,
+          $options: "i",
+        },
+      };
     }
-    if (req.query.isPrivate) {
-      searchQuery.isPrivate = req.query.isPrivate == "true";
-    }
+
     const totalPosts = await postModal.countDocuments(searchQuery);
     // const getPosts = await postModal
     //   .find(searchQuery)

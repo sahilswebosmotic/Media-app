@@ -7,9 +7,7 @@ import { defaultValues, profileSchema } from './profileFormSchema'
 
 const useUserProfilePage = () => {
   const { data, isLoading, isError, error } = useGetCurrentUserQuery()
-  // console.log(data);
   const { data: userImageData } = useGetUserImageQuery()
-  console.log(data);
   const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation()
 
   const [isEditing, setIsEditing] = useState(false)
@@ -44,13 +42,18 @@ const useUserProfilePage = () => {
   const watchedFirstname = useWatch({ control, name: 'firstname' })
   const watchedLastname = useWatch({ control, name: 'lastname' })
   const watchedFile = useWatch({ control, name: 'profilePhotoFile' })
+  const watchedUserName = useWatch({ control, name:'username'})
 
   const hasStoredAvatar = Boolean(userImageData?.imageData)
   const avatarSource = removeAvatar ? undefined : profilePreview || userImageData?.imageData || undefined
+  
   const avatarAlt = isEditing
-    ? `${watchedFirstname || ''} ${watchedLastname || ''}`.trim()
-    : `${profileValues.firstname} ${profileValues.lastname}`.trim()
-  const displayName = `${isEditing ? watchedFirstname || '' : profileValues.firstname} ${isEditing ? watchedLastname || '' : profileValues.lastname}`.trim()
+    ? `${watchedFirstname || ''} ${watchedLastname || ''} ${watchedUserName || ''}` .trim()
+    : `${profileValues.firstname} ${profileValues.lastname} ${profileValues.username}`.trim()
+
+  const displayName = `${isEditing ? watchedFirstname || '' : profileValues.firstname} 
+                        ${isEditing ? watchedLastname || '' : profileValues.lastname}
+                        ${isEditing ? watchedUserName || '' : profileValues.username}`.trim()
 
   const clearPreview = () => {
     if (profilePreview) {

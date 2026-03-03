@@ -19,7 +19,7 @@ const ProfileActions = ({
 
   return (
     <Stack direction="row" spacing={1.2} flexWrap="wrap" useFlexGap>
-      <Button type="submit" variant="contained" disabled={isUpdating || (!isDirty && !removeAvatar)}>
+      <Button type="submit" variant="contained" >
         {isUpdating ? 'Saving...' : 'Save Changes'}
       </Button>
       <Button type="button" variant="outlined" onClick={onCancel} disabled={isUpdating}>

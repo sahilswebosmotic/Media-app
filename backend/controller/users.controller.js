@@ -5,6 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const { firstname, lastname, username } = require("../utils/validations");
 const postModal = require("../models/posts.modal");
+const { getImageBase64 } = require("../utils/getImageData");
 
 const getUser = async (req, res, next) => {
   try {
@@ -32,6 +33,10 @@ const updateUser = async (req, res, next) => {
   try {
     delete req.body.password;
     delete req.body.isVerified;
+    if (req.body.filePath) {
+      req.body.profilePhoto = req.body.filePath;
+      delete req.body.filePath;
+    }
 
     await UPDATE_USER_SCHEMA.validate(req.body);
     const { _id } = req.user;
@@ -44,6 +49,24 @@ const updateUser = async (req, res, next) => {
       throw new HttpError(404, "User not found.");
     }
     return res.status(200).json({ status: "success", data: newUserData });
+  } catch (e) {
+    next(e);
+  }
+};
+
+const getUserImage = async (req, res, next) => {
+  try {
+    const { userId } = req.query;
+    const targetUserId = userId || req.user._id;
+    const user = await userModel.findById(targetUserId, { profilePhoto: 1 });
+    if (!user) {
+      throw new HttpError(404, "User not found.");
+    }
+    if (!user.profilePhoto) {
+      return res.status(200).json({ status: "success", imageData: null });
+    }
+    const base64 = await getImageBase64(user.profilePhoto);
+    return res.status(200).json({ status: "success", imageData: base64 });
   } catch (e) {
     next(e);
   }
@@ -136,6 +159,7 @@ const deleteUser = async (req, res, next) => {
 module.exports = {
   getUser,
   updateUser,
+  getUserImage,
   getUserProfile,
   getAllUsers,
   deleteUser,

@@ -2,14 +2,14 @@ import { apiSlice } from './apiSlice'
 
 export const usersApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    // getUserImage: builder.query({
-    //   query: ({ userId } = {}) => ({
-    //     url: '/users/get-user-image',
-    //     method: 'GET',
-    //     params: userId,
-    //   }),
-    //   providesTags: ['Profile'],
-    // }),
+    getUserImage: builder.query({
+      query: ({ userId } = {}) => ({
+        url: `/users/get-user-image`,
+        method: 'GET',
+        params: userId ? { userId } : undefined,
+      }),
+      providesTags: ['Profile'],
+    }),
     updateUser: builder.mutation({
       query: (payload) => ({
         url: '/users/update-user',
@@ -21,4 +21,4 @@ export const usersApi = apiSlice.injectEndpoints({
   }),
 })
 
-export const {  useUpdateUserMutation } = usersApi
+export const {useGetUserImageQuery,  useUpdateUserMutation } = usersApi

@@ -29,11 +29,11 @@ const multerStorage = multer.diskStorage({
     try {
       const folderPath = path.resolve(__dirname, `../uploads/${req.user._id}`);
       if (!fs.existsSync(folderPath)) {
-        await fs.mkdirSync(folderPath);
+        await fs.mkdirSync(folderPath, { recursive: true });
       }
       cb(null, folderPath);
     } catch (e) {
-      next(e);
+      cb(e);
     }
   },
   filename: async (req, file, cb) => {
@@ -43,7 +43,7 @@ const multerStorage = multer.diskStorage({
       req.body.filePath = filePath;
       cb(null, fileName);
     } catch (e) {
-      next(e);
+      cb(e);
     }
   },
 });

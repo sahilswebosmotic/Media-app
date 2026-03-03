@@ -1,7 +1,7 @@
 import { ImageList, ImageListItem } from "@mui/material"
 import FeedCard from "./FeedCard"
 
-const FeedGrid = ({ posts, cols, onOpenPost }) => {
+const FeedGrid = ({ posts, cols, onOpenPost  }) => {
   return (
     <ImageList
       variant="masonry"

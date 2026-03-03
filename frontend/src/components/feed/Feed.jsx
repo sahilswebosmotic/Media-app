@@ -17,14 +17,11 @@ const Feed = () => {
   })
 
   const { data: currentUserData } = useGetCurrentUserQuery()
-  const currentUserId = currentUserData?.data?._id
+  const currentUserId = currentUserData?.data?.userId
 
   const posts = data?.data?.data ?? []
 
-  const visiblePosts = posts.filter(post => {
-    if (!post.isPrivate) return true
-    return post.userData?._id === currentUserId
-  })
+
 
   if (isLoading) {
     return (
@@ -58,7 +55,7 @@ const Feed = () => {
       </Stack>
 
       <FeedGrid
-        posts={visiblePosts}
+        posts={posts}
         cols={4}
         onOpenPost={setSelectedPost}
       />
