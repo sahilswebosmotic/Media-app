@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Alert, Button, Stack } from '@mui/material'
-import { useLoginMutation } from '@store/slice/authApi'
+import { Alert, Button, Stack, Typography } from '@mui/material'
+import { useLoginMutation, useResendVerificationMutation } from '@store/slice/authApi'
 import { useAuth } from '@context/auth/useAuth'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
@@ -9,6 +9,7 @@ import AuthFormCard from './AuthFormCard'
 import AuthRedirectText from './AuthRedirectText'
 import AuthFieldList from './AuthFieldList'
 import useToast from '@context/toast/useToast'
+import { useState } from 'react'
 
 
 const signInSchema = yup.object({
@@ -25,13 +26,16 @@ const SignInForm = () => {
   const navigate = useNavigate()
   const { login } = useAuth()
   const [loginUser, { isLoading }] = useLoginMutation()
-  const { showSuccess } = useToast();
+  const [resendVerification, { isLoading: isResending }] = useResendVerificationMutation()
+  const { showSuccess, showError } = useToast();
+  const [unverifiedEmail, setUnverifiedEmail] = useState(null)
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     setError,
+    getValues,
   } = useForm({
     defaultValues,
     resolver: yupResolver(signInSchema),
@@ -39,14 +43,28 @@ const SignInForm = () => {
 
   const onSubmit = async (values) => {
     try {
+      setUnverifiedEmail(null)
       const response = await loginUser(values).unwrap()
       login(response)
       showSuccess(`Welcome back!`);
       navigate('/home')
     } catch (error) {
+      if (error?.data?.message === 'Account not verified.') {
+        setUnverifiedEmail(values.email)
+      }
       setError('root.apiError', {
         message: error?.data?.message || 'Unable to sign in. Please try again.',
       })
+    }
+  }
+
+  const handleResend = async () => {
+    try {
+      await resendVerification({ email: unverifiedEmail }).unwrap()
+      showSuccess('Verification email resent! Please check your inbox.')
+      setUnverifiedEmail(null)
+    } catch (error) {
+      showError(error?.data?.message || 'Failed to resend verification email.')
     }
   }
 
@@ -59,7 +77,20 @@ const SignInForm = () => {
   return (
     <AuthFormCard title='Sign In' subtitle='Login to your account'>
       <Stack component='form' onSubmit={handleSubmit(onSubmit)} noValidate spacing={1.6}>
-        {errors.root?.apiError?.message && <Alert severity='error'>{errors.root.apiError.message}</Alert>}
+        {errors.root?.apiError?.message && (
+          <Alert
+            severity='error'
+            action={
+              unverifiedEmail && (
+                <Button color="inherit" size="small" onClick={handleResend} disabled={isResending}>
+                  {isResending ? 'Sending...' : 'Resend'}
+                </Button>
+              )
+            }
+          >
+            {errors.root.apiError.message}
+          </Alert>
+        )}
 
         <AuthFieldList fields={LOGIN_FIELDS} register={register} errors={errors} />
 

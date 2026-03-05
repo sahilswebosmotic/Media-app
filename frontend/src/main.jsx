@@ -6,6 +6,7 @@ import App from './App.jsx'
 import { store } from '@store/store'
 import { AuthProvider } from './context/auth/AuthContext'
 import { ToastProvider } from './context/toast/ToastProvider.jsx'
+import {SocketProvider} from './context/socket/SocketContext.jsx'
 
 const darkTheme = createTheme({
   palette: {
@@ -105,10 +106,12 @@ createRoot(document.getElementById('root')).render(
     <ToastProvider>
     <Provider store={store}>
       <AuthProvider>
+        <SocketProvider>
         <ThemeProvider theme={darkTheme}>
           <CssBaseline />
           <App />
         </ThemeProvider>
+        </SocketProvider>
       </AuthProvider>
     </Provider>
     </ToastProvider>

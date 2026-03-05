@@ -1,7 +1,10 @@
 
-import { Box, Stack, Typography, Button, CircularProgress, Alert ,useMediaQuery,
-  useTheme, } from "@mui/material"
-import { useEffect, useState } from "react"
+import {
+  Box, Stack, Typography, Button, CircularProgress, Alert, useMediaQuery,
+  useTheme, TextField, InputAdornment
+} from "@mui/material"
+import SearchIcon from "@mui/icons-material/Search"
+import { useEffect, useState, useMemo } from "react"
 import { useGetFeedPostsQuery } from "@store/slice/postsApi"
 import { useGetCurrentUserQuery } from "@store/slice/authApi"
 import FeedGrid from "./FeedGrid"
@@ -14,18 +17,29 @@ const Feed = () => {
   const isSmDown = useMediaQuery(theme.breakpoints.down('sm'))
   const [selectedPost, setSelectedPost] = useState(null)
   const [isCreateOpen, setIsCreateOpen] = useState(false)
-  const [posts,setPosts] = useState([])
+  const [posts, setPosts] = useState([])
+  
+  const [search, setSearch] = useState('')
+  const [debouncedSearch, setDebouncedSearch] = useState('')
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedSearch(search), 400)
+    return () => clearTimeout(timer)
+  }, [search])
+
   const { data, isLoading, isError, error } = useGetFeedPostsQuery({
     page: 1,
     perPage: 30,
+    search: debouncedSearch,
   })
-  const width = isSmDown ? "100%" :isMdDown ?"70%" :"60%"
-  
+  const width = isSmDown ? "100%" : isMdDown ? "70%" : "60%"
+
   const { data: currentUserData } = useGetCurrentUserQuery()
   const currentUserId = currentUserData?.data?._id
-  useEffect(()=>{
+
+  useEffect(() => {
     setPosts(data?.data?.data ?? [])
-  },[data])
+  }, [data])
 
   const handleDeletePost = (post) => {
     // remove the post from ui only 
@@ -63,6 +77,26 @@ const Feed = () => {
           Create Post
         </Button>
       </Stack>
+
+      <TextField
+        id="feed-search"
+        placeholder="Search posts by title…"
+        size="small"
+        fullWidth
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        slotProps={{
+          input: {
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon sx={{ color: 'text.secondary', fontSize: 20 }} />
+              </InputAdornment>
+            ),
+          },
+        }}
+        sx={{ mb: 2.5, display: "flex", maxWidth:420 , mx:"auto" }}
+      />
+
 
       <FeedGrid
         posts={posts}

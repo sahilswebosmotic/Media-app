@@ -2,13 +2,16 @@ import { useMemo, useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm, useWatch } from 'react-hook-form'
 import { useGetCurrentUserQuery } from '@store/slice/authApi'
-import { useGetUserImageQuery, useUpdateUserMutation } from '@store/slice/usersApi'
+import { useGetUserImageQuery, useUpdateUserMutation, useDeleteAccountMutation } from '@store/slice/usersApi'
+import { useAuth } from '@context/auth/useAuth'
 import { defaultValues, profileSchema } from './profileFormSchema'
 
 const useUserProfilePage = () => {
   const { data, isLoading, isError, error } = useGetCurrentUserQuery()
   const { data: userImageData } = useGetUserImageQuery()
   const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation()
+  const [deleteAccount, { isLoading: isDeleting }] = useDeleteAccountMutation()
+  const { logout } = useAuth()
 
   const [isEditing, setIsEditing] = useState(false)
   const [profilePreview, setProfilePreview] = useState('')
@@ -102,6 +105,15 @@ const useUserProfilePage = () => {
     setRemoveAvatar(true)
   }
 
+  const onAccountDelete = async () => {
+    try {
+      await deleteAccount().unwrap()
+      logout()
+    } catch (err) {
+      setSubmitError(err?.data?.message || 'Failed to delete account.')
+    }
+  }
+
   const onSubmit = async (values) => {
     setSuccessMessage('')
     setSubmitError('')
@@ -134,6 +146,7 @@ const useUserProfilePage = () => {
     error,
     isEditing,
     isUpdating,
+    isDeleting,
     register,
     errors,
     isDirty,
@@ -153,6 +166,7 @@ const useUserProfilePage = () => {
     handleFileChange,
     handleRemoveAvatar,
     removeAvatar,
+    onAccountDelete,
   }
 }
 

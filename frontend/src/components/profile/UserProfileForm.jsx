@@ -1,5 +1,21 @@
-import React from 'react'
-import { Alert, Box, Card, CardContent, CircularProgress, Container, Grid, Stack } from '@mui/material'
+import React, { useState } from 'react'
+import {
+  Alert,
+  Box,
+  Card,
+  CardContent,
+  CircularProgress,
+  Container,
+  Grid,
+  Stack,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions
+} from '@mui/material'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import ProfileAvatarSection from './ProfileAvatarSection'
 import ProfileActions from './ProfileActions'
 import ProfileDetailsSection from './ProfileDetailsSection'
@@ -15,6 +31,7 @@ const UserProfileForm = () => {
     error,
     isEditing,
     isUpdating,
+    isDeleting,
     register,
     errors,
     isDirty,
@@ -34,7 +51,10 @@ const UserProfileForm = () => {
     handleFileChange,
     handleRemoveAvatar,
     removeAvatar,
+    onAccountDelete,
   } = useUserProfilePage()
+
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
 
   if (isLoading) {
     return (
@@ -51,7 +71,7 @@ const UserProfileForm = () => {
       </Container>
     )
   }
-    
+
   if (!currentUser) {
     return (
       <Container maxWidth='md'>
@@ -61,7 +81,7 @@ const UserProfileForm = () => {
   }
 
   return (
-    <Container maxWidth='md' sx={{ pb: 2 }}>
+    <Container maxWidth='md' sx={{ pb: 4 }}>
       <Card
         sx={{
           borderRadius: 5,
@@ -70,6 +90,7 @@ const UserProfileForm = () => {
           backdropFilter: 'blur(14px)',
           overflow: 'hidden',
           boxShadow: '0 24px 56px rgba(2, 6, 23, 0.42)',
+          mb: 3
         }}
       >
         <ProfileHeader isPrivate={currentUser?.isPrivate} />
@@ -122,6 +143,43 @@ const UserProfileForm = () => {
           </Stack>
         </CardContent>
       </Card>
+
+      {!isEditing && (
+        <Box sx={{ textAlign: 'center' }}>
+          <Button
+            color="error"
+            startIcon={<DeleteForeverIcon />}
+            onClick={() => setOpenDeleteDialog(true)}
+            sx={{ borderRadius: 2, textTransform: 'none' }}
+          >
+            Delete Account
+          </Button>
+        </Box>
+      )}
+
+      <Dialog
+        open={openDeleteDialog}
+        onClose={() => setOpenDeleteDialog(false)}
+        PaperProps={{ sx: { borderRadius: 4, bgcolor: 'background.paper' } }}
+      >
+        <DialogTitle sx={{ fontWeight: 800 }}>Delete Account Forever?</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            This action is permanent. All your posts, photos, and profile data will be erased from our community.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions sx={{ p: 3 }}>
+          <Button onClick={() => setOpenDeleteDialog(false)} variant="outlined">Cancel</Button>
+          <Button
+            onClick={onAccountDelete}
+            color="error"
+            variant="contained"
+            disabled={isDeleting}
+          >
+            {isDeleting ? 'Deleting...' : 'Confirm Delete'}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   )
 }

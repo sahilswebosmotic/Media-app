@@ -13,6 +13,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@hookform/resolvers": "^5.2.2",
+    "@mui/icons-material": "^7.3.9",
     "@mui/material": "^7.3.8",
     "@reduxjs/toolkit": "^2.11.2",
     "js-cookie": "^3.0.5",
@@ -21,6 +22,7 @@
     "react-hook-form": "^7.71.2",
     "react-redux": "^9.2.0",
     "react-router-dom": "^6.30.3",
+    "socket.io-client": "^4.8.3",
     "yup": "^1.7.1"
   },
   "devDependencies": {

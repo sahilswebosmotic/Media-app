@@ -25,6 +25,14 @@ export const postsApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Posts'],
     }),
+    getUserPosts: builder.query({
+      query: ({ userId, page = 1, perPage = 20 } = {}) => ({
+        url: '/posts/get-user-posts',
+        method: 'GET',
+        params: { userId, page, perPage },
+      }),
+      providesTags: ['Posts'],
+    }),
   }),
 })
 
@@ -33,4 +41,5 @@ export const {
   useGetFeedImageQuery,
   useLazyGetFeedImageQuery,
   useCreatePostMutation,
+  useGetUserPostsQuery,
 } = postsApi

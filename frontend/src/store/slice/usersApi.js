@@ -18,7 +18,34 @@ export const usersApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Auth', 'Profile'],
     }),
+    getUsersProfile: builder.query({
+      query: (userId) => ({
+        url: '/users/get-users-profile',
+        method: 'GET',
+        params: { userId },
+      }),
+    }),
+    getAllUsers: builder.query({
+      query: ({ page = 1, perPage = 10, search = '' } = {}) => ({
+        url: '/users/get-all-user',
+        method: 'GET',
+        params: { page, perPage, searchText: search },
+      }),
+    }),
+    deleteAccount: builder.mutation({
+      query: () => ({
+        url: '/users/delete-user',
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Auth'],
+    }),
   }),
 })
 
-export const {useGetUserImageQuery,  useUpdateUserMutation } = usersApi
+export const {
+  useGetUserImageQuery,
+  useUpdateUserMutation,
+  useGetUsersProfileQuery,
+  useGetAllUsersQuery,
+  useDeleteAccountMutation,
+} = usersApi

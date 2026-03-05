@@ -23,8 +23,28 @@ export const authApi = apiSlice.injectEndpoints({
       }),
       providesTags: ['Auth', 'Profile'],
     }),
+    resendVerification: builder.mutation({
+      query: (payload) => ({
+        url: '/resend-verification',
+        method: 'POST',
+        body: payload,
+      }),
+    }),
+    verifyAccount: builder.query({
+      query: (token) => ({
+        url: `/verify-account`,
+        method: 'GET',
+        params: { token },
+      }),
+    }),
   }),
 })
 
-export const { useSignUpMutation, useLoginMutation, useGetCurrentUserQuery, useLazyGetCurrentUserQuery } =
-  authApi
+export const {
+  useSignUpMutation,
+  useLoginMutation,
+  useGetCurrentUserQuery,
+  useLazyGetCurrentUserQuery,
+  useResendVerificationMutation,
+  useVerifyAccountQuery,
+} = authApi
