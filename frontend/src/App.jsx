@@ -7,6 +7,7 @@ import UserProfile from '@components/profile/UserProfileForm'
 import Layout from './layout/Layout'
 import ProtectedRoute from '@components/routes/ProtectedRoute'
 import PublicRoute from '@components/routes/PublicRoute'
+import Discover from '@pages/Discover'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         {/* <Route> */}
           <Route element={<Layout />}>
           <Route path='/home' element={<Home />} />
+          <Route path='/discover' element={<Discover />} />
           <Route path='/user-profile' element={<UserProfile />} />
         </Route>
         </Route>
