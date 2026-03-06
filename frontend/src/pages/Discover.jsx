@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import React from "react";
 
 const PostCard = ({item}) =>{
@@ -38,11 +38,11 @@ const Discover = () => {
           Discover
         </Typography>
         <Grid container spacing={3}>
-          {discoverItems.map((item) => (
+          {/* {discoverItems.map((item) => (
             <Grid item key={item.id} xs={12} sm={6} md={4} lg={3}>
               <PostCard item={item} />
             </Grid>
-          ))}
+          ))} */}
         </Grid>
       </Box>
     </Container>

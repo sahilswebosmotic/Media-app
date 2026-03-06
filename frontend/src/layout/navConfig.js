@@ -4,4 +4,4 @@ export const NAV_LINKS = [
   { label: 'Profile', path: '/user-profile' },
 ]
 
-export const USER_MENU_ACTIONS = ['Profile', 'Logout' , 'Discover']
+export const USER_MENU_ACTIONS = ['Logout']
