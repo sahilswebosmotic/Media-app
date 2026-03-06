@@ -1,7 +1,6 @@
 
 import { Box, Stack, Typography, Button, CircularProgress, Alert ,useMediaQuery, TextField, InputAdornment,
   useTheme, } from "@mui/material"
-  import {ArrowBackIos,ArrowForwardIos} from "@mui/icons-material"
   import SearchIcon from "@mui/icons-material/Search"
 import { useEffect, useState } from "react"
 import { useGetFeedPostsQuery } from "@store/slice/postsApi"
@@ -34,7 +33,7 @@ const Feed = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [page])
 
-  const { data, isLoading, isError, error } = useGetFeedPostsQuery({
+  const { data, isLoading, isError, error, isFetching } = useGetFeedPostsQuery({
     page,
     perPage: 5,
     search: debouncedSearch,
@@ -43,15 +42,27 @@ const Feed = () => {
   
   const { data: currentUserData } = useGetCurrentUserQuery()
   const currentUserId = currentUserData?.data?._id
+
+
   useEffect(()=>{
-    setPosts(data?.data?.data ?? [])
+    if (!data?.data?.data) return
+
+    if (page === 1) {
+      setPosts(data.data.data)
+    } else {
+      setPosts((prev) => [...prev, ...data.data.data])
+    }
   },[data])
 
-  const handlePageChange = (event, value) => {
-    setPage(value);
-  };
+  const totalPosts = data?.data?.total || 0;
+  const totalPages = Math.ceil(totalPosts / 5);
+  const hasMore = posts.length < totalPosts;
 
-  const totalPages = Math.ceil((data?.data?.total || 0) / 5);
+  const loadMore = () => {
+    if (hasMore && !isLoading && !isFetching && page < totalPages) {
+      setPage((prev) => prev + 1);
+    }
+  };
 
   const handleDeletePost = (post) => {
     // remove the post from ui only 
@@ -59,7 +70,7 @@ const Feed = () => {
   }
 
 
-  if (isLoading) {
+  if (isLoading && page === 1) {
     return (
       <Box sx={{ minHeight: "45vh", display: "grid", placeItems: "center" }}>
         <CircularProgress />
@@ -69,77 +80,60 @@ const Feed = () => {
   if (isError) return <Alert severity="error">{error?.data?.message}</Alert>
 
   return (
-    <Box sx={{ width: "min(1200px, 92vw)", mx: "auto" }}>
-      <Stack
-        direction={{ xs: "column", sm: "row" }}
-        justifyContent="space-between"
-        spacing={1.5}
-        alignItems={{ xs: "flex-start", sm: "center" }}
-        sx={{ mb: 2.5 }}
-      >
-        <Box>
-          <Typography variant="h5" sx={{ fontWeight: 800 }}>
-            Explore Feed
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Discover recent posts from the community.
-          </Typography>
-        </Box>
-        <Button variant="contained" onClick={() => setIsCreateOpen(true)}>
-          Create Post
-        </Button>
-      </Stack>
-
-      <TextField
-        id="feed-search"
-        placeholder="Search posts by title…"
-        size="small"
-        fullWidth
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        slotProps={{
-          input: {
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon sx={{ color: 'text.secondary', fontSize: 20 }} />
-              </InputAdornment>
-            ),
-          },
-        }}
-        sx={{ mb: 2.5, display: "flex", maxWidth:420 , mx:"auto" }}
-      />
-
-      <FeedGrid
-        posts={posts}
-        width={width}
-        onOpenPost={setSelectedPost}
-        onDeletePost={handleDeletePost}
-        currentUserId={currentUserId}
-      />
-
-      <Stack direction="row" justifyContent="center" sx={{ mt: 4, mb: 2 }} spacing={2}>
-        <Button
-          variant="outlined"
-          startIcon={<ArrowBackIos />}
-          disabled={page === 1}
-          onClick={() => setPage((prev) => prev - 1)}
-          size="small"
+    <Box sx={{ width: "min(1200px, 92vw)", mx: "auto", height: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <Box sx={{ p: 2 }}>
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          justifyContent="space-between"
+          spacing={1.5}
+          alignItems={{ xs: "flex-start", sm: "center" }}
+          sx={{ mb: 2.5 }}
         >
-          Previous
-        </Button>
-        <Typography sx={{ alignSelf: 'center' }}>
-          Page {page} of {totalPages || 1}
-        </Typography>
-        <Button
-          variant="outlined"
-          endIcon={<ArrowForwardIos />}
-          disabled={page >= totalPages}
-          onClick={() => setPage((prev) => prev + 1)}
+          <Box>
+            <Typography variant="h5" sx={{ fontWeight: 800 }}>
+              Explore Feed
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Discover recent posts from the community.
+            </Typography>
+          </Box>
+          <Button variant="contained" onClick={() => setIsCreateOpen(true)}>
+            Create Post
+          </Button>
+        </Stack>
+
+        <TextField
+          id="feed-search"
+          placeholder="Search posts by title…"
           size="small"
-        >
-          Next
-        </Button>
-      </Stack>
+          fullWidth
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          slotProps={{
+            input: {
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon sx={{ color: 'text.secondary', fontSize: 20 }} />
+                </InputAdornment>
+              ),
+            },
+          }}
+          sx={{ mb: 2.5, display: "flex", maxWidth: 420 , mx:"auto" }}
+        />
+      </Box>
+
+      <Box sx={{ flexGrow: 1, minHeight: 0 }}>
+        <FeedGrid
+          posts={posts}
+          width={width}
+          onOpenPost={setSelectedPost}
+          onDeletePost={handleDeletePost}
+          currentUserId={currentUserId}
+          hasMore={hasMore}
+          loadMore={loadMore}
+          isFetching={isFetching}
+        />
+      </Box>
 
       <PostDialog
         post={selectedPost}
