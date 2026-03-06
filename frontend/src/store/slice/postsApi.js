@@ -3,7 +3,7 @@ import { apiSlice } from './apiSlice'
 export const postsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getFeedPosts: builder.query({
-      query: ({ page = 1, perPage = 20, search = '', isMyPostsOnly = false } = {}) => ({
+      query: ({ page = 1, perPage = 5, search = '', isMyPostsOnly = false } = {}) => ({
         url: '/posts/get-feed-posts',
         method: 'GET',
         params: { page, perPage, search, isMyPostsOnly },

@@ -102,11 +102,6 @@ const CreatePostForm = ({ onClose }) => {
         </Button>
       </DialogActions>
     </Stack>
-    
-    
-  
-    
-
   )
 }
 
