@@ -1,4 +1,4 @@
-import { Box, Button } from '@mui/material'
+import { Box, Button, alpha } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 
 const DesktopNavLinks = ({ links, pathname }) => {
@@ -16,10 +16,14 @@ const DesktopNavLinks = ({ links, pathname }) => {
             color: pathname === link.path ? 'primary.main' : 'text.primary',
             display: 'block',
             borderRadius: 2,
-            border: pathname === link.path ? '1px solid rgba(56, 189, 248, 0.45)' : '1px solid transparent',
-            backgroundColor: pathname === link.path ? 'rgba(56, 189, 248, 0.12)' : 'transparent',
+            border: pathname === link.path 
+              ? theme => `1px solid ${alpha(theme.palette.primary.main, 0.45)}` 
+              : '1px solid transparent',
+            backgroundColor: pathname === link.path 
+              ? theme => alpha(theme.palette.primary.main, 0.12) 
+              : 'transparent',
             '&:hover': {
-              backgroundColor: 'rgba(148, 163, 184, 0.12)',
+              backgroundColor: theme => alpha(theme.palette.text.primary, 0.08),
             },
           }}
         >

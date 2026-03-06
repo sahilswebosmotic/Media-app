@@ -1,4 +1,4 @@
-import { Avatar, Box, Divider, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material'
+import { Avatar, Box, Divider, IconButton, Menu, MenuItem, Tooltip, Typography, alpha } from '@mui/material'
 
 const UserMenu = ({ user, actions, anchorEl, onOpen, onClose, onAction }) => {
   return (
@@ -8,14 +8,14 @@ const UserMenu = ({ user, actions, anchorEl, onOpen, onClose, onAction }) => {
           onClick={onOpen}
           sx={{
             p: 0.25,
-            border: '1px solid rgba(148, 163, 184, 0.3)',
+            border: theme => `1px solid ${theme.palette.divider}`,
             borderRadius: 99,
           }}
         >
           <Avatar
             sx={{
-              bgcolor: 'rgba(56, 189, 248, 0.2)',
-              color: 'primary.light',
+              bgcolor: theme => alpha(theme.palette.primary.main, 0.2),
+              color: 'primary.main',
               fontWeight: 800,
             }}
           >

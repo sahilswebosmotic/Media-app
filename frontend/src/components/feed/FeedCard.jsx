@@ -7,8 +7,6 @@ const FeedCard = ({ post, onOpen ,onDelete,currentUserId  }) => {
       sx={{
         borderRadius: 3.2,
         overflow: "hidden",
-        border: "1px solid rgba(148, 163, 184, 0.2)",
-        boxShadow: "0 14px 28px rgba(2, 6, 23, 0.35)",
       }}
     >
       <FeedImage

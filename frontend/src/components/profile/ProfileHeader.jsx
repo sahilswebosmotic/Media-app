@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Chip, Stack, Typography } from '@mui/material'
+import { Box, Chip, Stack, Typography, alpha } from '@mui/material'
 
 const ProfileHeader = ({ isPrivate }) => {
   return (
@@ -7,9 +7,10 @@ const ProfileHeader = ({ isPrivate }) => {
       sx={{
         px: { xs: 2.5, md: 4 },
         py: { xs: 2.2, md: 3 },
-        background:
-          'linear-gradient(90deg, rgba(56, 189, 248, 0.2) 0%, rgba(99, 102, 241, 0.18) 50%, rgba(2, 6, 23, 0.34) 100%)',
-        borderBottom: '1px solid rgba(148, 163, 184, 0.2)',
+        background: theme => 
+          `linear-gradient(90deg, ${alpha(theme.palette.primary.main, 0.15)} 0%, ${alpha(theme.palette.secondary.main, 0.1)} 50%, ${alpha(theme.palette.background.default, 0.5)} 100%)`,
+        borderBottom: '1px solid',
+        borderColor: 'divider',
       }}
     >
       <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} alignItems={{ xs: 'flex-start', md: 'center' }}>

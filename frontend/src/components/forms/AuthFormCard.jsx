@@ -10,8 +10,7 @@ const AuthFormCard = ({ title, subtitle, children }) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                background:
-                    "radial-gradient(circle at 8% 12%, rgba(14, 165, 233, 0.22), transparent 30%), radial-gradient(circle at 85% 88%, rgba(99, 102, 241, 0.18), transparent 28%), #050a16",
+                bgcolor: "transparent",
             }}
         >
             <Paper
@@ -21,10 +20,10 @@ const AuthFormCard = ({ title, subtitle, children }) => {
                     maxWidth: { xs: 540, sm: 470 },
                     borderRadius: { xs: 3, sm: 4 },
                     border: 1,
-                    borderColor: "rgba(148, 163, 184, 0.22)",
-                    bgcolor: "rgba(15, 23, 42, 0.86)",
+                    borderColor: "divider",
+                    bgcolor: (theme) => theme.palette.mode === "dark" ? "rgba(15, 23, 42, 0.86)" : "rgba(255, 255, 255, 0.9)",
                     backdropFilter: "blur(14px)",
-                    boxShadow: "0 24px 56px rgba(2, 6, 23, 0.5)",
+                    boxShadow: (theme) => theme.palette.mode === "dark" ? "0 24px 56px rgba(2, 6, 23, 0.5)" : "0 8px 32px rgba(0, 0, 0, 0.08)",
                 }}
             >
                 <Box

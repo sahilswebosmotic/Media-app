@@ -65,11 +65,12 @@ const UserProfileForm = () => {
       <Card
         sx={{
           borderRadius: 5,
-          border: '1px solid rgba(148, 163, 184, 0.2)',
-          bgcolor: 'rgba(15, 23, 42, 0.84)',
+          border: '1px solid',
+          borderColor: 'divider',
+          bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(15, 23, 42, 0.84)' : 'rgba(255, 255, 255, 0.9)',
           backdropFilter: 'blur(14px)',
           overflow: 'hidden',
-          boxShadow: '0 24px 56px rgba(2, 6, 23, 0.42)',
+          boxShadow: theme => theme.palette.mode === 'dark' ? '0 24px 56px rgba(2, 6, 23, 0.42)' : '0 12px 32px rgba(0, 0, 0, 0.05)',
         }}
       >
         <ProfileHeader isPrivate={currentUser?.isPrivate} />

@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography, Card, CardMedia, CardContent, CardActions, Button } from "@mui/material";
 import React from "react";
 
 const PostCard = ({item}) =>{
@@ -28,25 +28,23 @@ const PostCard = ({item}) =>{
 const Discover = () => {
   
     return (
-        <>
-        {/* List of all the user's and there posts which are public */}
-        <h1>Discover</h1>
-        <p>Explore the world of creativity and inspiration</p>  
-            <Container maxWidth="lg">
-      <Box sx={{ my: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Discover
-        </Typography>
-        <Grid container spacing={3}>
-          {/* {discoverItems.map((item) => (
-            <Grid item key={item.id} xs={12} sm={6} md={4} lg={3}>
-              <PostCard item={item} />
-            </Grid>
-          ))} */}
-        </Grid>
-      </Box>
-    </Container>
-        </>
+        <Container maxWidth="lg">
+            <Box sx={{ my: 4 }}>
+                <Typography variant="h4" component="h1" sx={{ fontWeight: 800, mb: 0.5 }}>
+                    Discover
+                </Typography>
+                <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
+                    Explore the world of creativity and inspiration
+                </Typography>
+                <Grid container spacing={3}>
+                    {/* {discoverItems.map((item) => (
+                    <Grid item key={item.id} xs={12} sm={6} md={4} lg={3}>
+                    <PostCard item={item} />
+                    </Grid>
+                ))} */}
+                </Grid>
+            </Box>
+        </Container>
     );
 };
 

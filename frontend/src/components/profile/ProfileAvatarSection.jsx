@@ -1,5 +1,5 @@
 import React from 'react'
-import { Avatar, Button, Stack, Typography } from '@mui/material'
+import { Avatar, Button, Stack, Typography, alpha } from '@mui/material'
 
 const ProfileAvatarSection = ({
   avatarSource,
@@ -20,14 +20,19 @@ const ProfileAvatarSection = ({
       sx={{
         p: { xs: 1.5, md: 2 },
         borderRadius: 3,
-        border: '1px solid rgba(148, 163, 184, 0.18)',
-        backgroundColor: 'rgba(15, 23, 42, 0.42)',
+        border: '1px solid',
+        borderColor: 'divider',
+        backgroundColor: theme => alpha(theme.palette.background.paper, 0.4),
       }}
     >
       <Avatar
         src={avatarSource}
         alt={avatarAlt || 'User profile photo'}
-        sx={{ width: 112, height: 112, border: '2px solid rgba(56, 189, 248, 0.4)' }}
+        sx={{ 
+          width: 112, 
+          height: 112, 
+          border: theme => `2px solid ${alpha(theme.palette.primary.main, 0.4)}` 
+        }}
       />
       <Stack spacing={1} sx={{ width: '100%' }}>
         <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>

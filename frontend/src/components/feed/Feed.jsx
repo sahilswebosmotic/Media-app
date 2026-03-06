@@ -1,6 +1,6 @@
 
 import { Box, Stack, Typography, Button, CircularProgress, Alert ,useMediaQuery, TextField, InputAdornment,
-  useTheme, } from "@mui/material"
+  useTheme, alpha } from "@mui/material"
   import SearchIcon from "@mui/icons-material/Search"
 import { useEffect, useState } from "react"
 import { useGetFeedPostsQuery } from "@store/slice/postsApi"
@@ -62,7 +62,7 @@ const Feed = () => {
     if (hasMore && !isLoading && !isFetching && page < totalPages) {
       setPage((prev) => prev + 1);
     }
-  };
+  };  
 
   const handleDeletePost = (post) => {
     // remove the post from ui only 
@@ -90,14 +90,14 @@ const Feed = () => {
           sx={{ mb: 2.5 }}
         >
           <Box>
-            <Typography variant="h5" sx={{ fontWeight: 800 }}>
+            <Typography variant="h4" sx={{ fontWeight: 800, mb: 0.5, letterSpacing: '-0.02em' }}>
               Explore Feed
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body1" color="text.secondary">
               Discover recent posts from the community.
             </Typography>
           </Box>
-          <Button variant="contained" onClick={() => setIsCreateOpen(true)}>
+          <Button variant="contained" onClick={() => setIsCreateOpen(true)} size="large">
             Create Post
           </Button>
         </Stack>
@@ -105,7 +105,7 @@ const Feed = () => {
         <TextField
           id="feed-search"
           placeholder="Search posts by title…"
-          size="small"
+          size="medium"
           fullWidth
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -113,12 +113,29 @@ const Feed = () => {
             input: {
               startAdornment: (
                 <InputAdornment position="start">
-                  <SearchIcon sx={{ color: 'text.secondary', fontSize: 20 }} />
+                  <SearchIcon sx={{ color: 'primary.main', fontSize: 22 }} />
                 </InputAdornment>
               ),
             },
           }}
-          sx={{ mb: 2.5, display: "flex", maxWidth: 420 , mx:"auto" }}
+          sx={{ 
+            mb: 4, 
+            maxWidth: 600, 
+            mx: "auto",
+            display: "flex",
+            '& .MuiOutlinedInput-root': {
+              bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(15, 23, 42, 0.48)' : 'rgba(255, 255, 255, 0.7)',
+              backdropFilter: 'blur(8px)',
+              transition: 'all 0.2s ease',
+              '&:hover': {
+                bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(15, 23, 42, 0.6)' : 'rgba(255, 255, 255, 0.9)',
+              },
+              '&.Mui-focused': {
+                bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(15, 23, 42, 0.8)' : '#fff',
+                boxShadow: theme => `0 0 0 4px ${alpha(theme.palette.primary.main, 0.1)}`,
+              }
+            }
+          }}
         />
       </Box>
 

@@ -42,7 +42,8 @@ const PostImageUpload = ({ error, value, onChange }) => {
             borderRadius: 2,
             maxHeight: 240,
             objectFit: "cover",
-            border: "1px solid rgba(148, 163, 184, 0.2)",
+            border: "1px solid",
+            borderColor: "divider",
           }}
         />
       )}

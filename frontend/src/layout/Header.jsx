@@ -2,6 +2,7 @@ import {
   AppBar,
   Container,
   Toolbar,
+  Box,
 } from '@mui/material'
 import { useState } from 'react'
 import { useAuth } from '@context/auth/useAuth'
@@ -10,6 +11,7 @@ import AppBrand from './components/AppBrand'
 import MobileNavMenu from './components/MobileNavMenu'
 import DesktopNavLinks from './components/DesktopNavLinks'
 import UserMenu from './components/UserMenu'
+import ThemeToggle from './components/ThemeToggle'
 import { NAV_LINKS, USER_MENU_ACTIONS } from './navConfig'
 
 const Header = () => {
@@ -56,18 +58,18 @@ const Header = () => {
       elevation={0}
       sx={{
         border: 1,
-        borderColor: 'rgba(148, 163, 184, 0.22)',
+        borderColor: 'divider',
         borderRadius: '1rem',
         backdropFilter: 'blur(14px)',
-        bgcolor: 'rgba(15, 23, 42, 0.62)',
+        bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(15, 23, 42, 0.62)' : 'rgba(255, 255, 255, 0.62)',
         margin: 'auto',
         marginTop: { xs: 1.5, md: 2 },
         maxWidth: { xs: '94%', md: '86%' },
-        boxShadow: '0 18px 40px rgba(2, 6, 23, 0.35)',
+        boxShadow: theme => theme.palette.mode === 'dark' ? '0 18px 40px rgba(2, 6, 23, 0.35)' : '0 8px 30px rgba(0, 0, 0, 0.05)',
       }}
     >
       <Container maxWidth='xl'>
-        <Toolbar disableGutters sx={{ minHeight: { xs: 62, md: 68 } }}>
+        <Toolbar disableGutters sx={{ minHeight: { xs: 62, md: 68 }, gap: 1 }}>
           <AppBrand />
 
           <MobileNavMenu
@@ -78,6 +80,8 @@ const Header = () => {
           />
           <AppBrand mobile />
           <DesktopNavLinks links={NAV_LINKS} pathname={location.pathname} />
+          <Box sx={{ flexGrow: 1 }} />
+          <ThemeToggle />
           <UserMenu
             user={user}
             actions={USER_MENU_ACTIONS}

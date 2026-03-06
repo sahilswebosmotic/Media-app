@@ -6,8 +6,8 @@ const AppBrand = ({ mobile = false }) => {
 
   return (
     <>
-      <Box component='span' sx={{ display, color: 'primary.light', mr: 1, fontWeight: 800 }}>
-        <img src="" alt="" />
+      <Box component='span' sx={{ display, color: 'primary.main', mr: 1, fontWeight: 900, fontSize: '1.2rem' }}>
+        <Box sx={{ width: 12, height: 12, bgcolor: 'primary.main', borderRadius: '50%', display: 'inline-block', mb: 0.5 }} />
       </Box>
       <Typography
         variant={mobile ? 'h5' : 'h6'}
@@ -18,12 +18,16 @@ const AppBrand = ({ mobile = false }) => {
           mr: 2,
           display,
           flexGrow: mobile ? 1 : 0,
-          fontWeight: 800,
-          letterSpacing: '.1rem',
+          fontWeight: 900,
+          letterSpacing: '.15rem',
           color: 'text.primary',
           textDecoration: 'none',
-          transition: 'opacity 0.2s ease',
-          '&:hover': { opacity: 0.92 },
+          transition: 'all 0.3s ease',
+          textShadow: theme => theme.palette.mode === 'light' ? '0 2px 4px rgba(0,0,0,0.02)' : '0 2px 10px rgba(0,0,0,0.2)',
+          '&:hover': { 
+            color: 'primary.main',
+            transform: 'scale(1.02)'
+          },
         }}
       >
         SOCIAL

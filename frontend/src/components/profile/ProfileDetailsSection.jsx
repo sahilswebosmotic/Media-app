@@ -1,23 +1,23 @@
 import React from 'react'
-import { Box, Divider, Grid, Stack, TextField, Typography } from '@mui/material'
+import { Box, Divider, Grid, Stack, TextField, Typography, alpha } from '@mui/material'
 import { formatDate } from './profileFormSchema'
 
 const editFieldSx = {
   '& .MuiInputLabel-root': {
-    color: 'rgba(226, 232, 240, 0.92)',
+    color: 'text.secondary',
     fontWeight: 600,
   },
   '& .MuiOutlinedInput-root': {
     borderRadius: 2,
-    backgroundColor: 'rgba(15, 23, 42, 0.55)',
+    backgroundColor: theme => alpha(theme.palette.background.default, 0.4),
     '& fieldset': {
-      borderColor: 'rgba(148, 163, 184, 0.35)',
+      borderColor: 'divider',
     },
     '&:hover fieldset': {
-      borderColor: 'rgba(56, 189, 248, 0.75)',
+      borderColor: 'primary.main',
     },
     '&.Mui-focused fieldset': {
-      borderColor: '#38bdf8',
+      borderColor: 'primary.main',
       borderWidth: 2,
     },
   },
@@ -25,13 +25,13 @@ const editFieldSx = {
 
 const readonlyFieldSx = {
   '& .MuiInputLabel-root': {
-    color: 'rgba(203, 213, 225, 0.9)',
+    color: 'text.secondary',
   },
   '& .MuiOutlinedInput-root': {
     borderRadius: 2,
-    backgroundColor: 'rgba(15, 23, 42, 0.35)',
+    backgroundColor: theme => alpha(theme.palette.background.default, 0.2),
     '& fieldset': {
-      borderColor: 'rgba(148, 163, 184, 0.22)',
+      borderColor: 'divider',
     },
   },
 }
@@ -52,12 +52,13 @@ const ProfileDetailsSection = ({
           sx={{
             p: { xs: 1.5, md: 2 },
             borderRadius: 3,
-            border: '1px solid rgba(56, 189, 248, 0.22)',
-            background:
-              'linear-gradient(180deg, rgba(56, 189, 248, 0.08) 0%, rgba(15, 23, 42, 0.25) 100%)',
+            border: '1px solid',
+            borderColor: theme => alpha(theme.palette.primary.main, 0.2),
+            background: theme =>
+              `linear-gradient(180deg, ${alpha(theme.palette.primary.main, 0.05)} 0%, ${alpha(theme.palette.background.paper, 0.2)} 100%)`,
           }}
         >
-          <Typography variant="subtitle2" sx={{ mb: 1.5, color: 'rgba(203, 213, 225, 0.95)' }}>
+          <Typography variant="subtitle2" sx={{ mb: 1.5, color: 'text.primary' }}>
             Update Information
           </Typography>
           <Grid container spacing={1.5}>
@@ -103,7 +104,7 @@ const ProfileDetailsSection = ({
 
       <TextField label="Email" value={email || ''} disabled fullWidth sx={readonlyFieldSx} />
 
-      <Divider sx={{ borderColor: 'rgba(255,255,255,0.08)' }} />
+      <Divider sx={{ borderColor: 'divider' }} />
 
       <Grid container spacing={1.5}>
         <Grid item xs={12} sm={6}>

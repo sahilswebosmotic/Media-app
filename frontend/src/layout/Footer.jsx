@@ -13,8 +13,8 @@ const Footer = () => {
         mt: 4,
         py: { xs: 2.5, sm: 3 },
         borderTop: 1,
-        borderColor: 'rgba(148, 163, 184, 0.2)',
-        bgcolor: 'rgba(15, 23, 42, 0.74)',
+        borderColor: 'divider',
+        bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(15, 23, 42, 0.74)' : 'rgba(255, 255, 255, 0.8)',
         backdropFilter: 'blur(10px)',
       }}
     >
