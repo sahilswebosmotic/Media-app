@@ -93,7 +93,7 @@ const getFeedPost = async (req, res, next) => {
           from: "users",
           localField: "userId",
           foreignField: "_id",
-          as: "userData",
+          as: "userId",
           pipeline: [
             {
               $project: {
@@ -106,7 +106,7 @@ const getFeedPost = async (req, res, next) => {
         },
       },
       {
-        $unwind: "$userData",
+        $unwind: "$userId",
       },
       {
         $skip: Number(page * perPage),
@@ -147,7 +147,11 @@ const getUsersPosts = async (req, res, next) => {
       .find(searchQuery)
       .skip(page * perPage)
       .limit(perPage)
-      .sort({ createdAt: "desc" });
+      .sort({ createdAt: "desc" })
+      .populate({
+        path: "userId",
+        select: "firstname lastname username"
+      });
     return res.status(200).json({
       status: "success",
       data: {

@@ -2,12 +2,12 @@ import { Box, CircularProgress, CardMedia } from "@mui/material"
 import { useGetFeedImageQuery } from "@store/slice/postsApi"
 
 const FeedImage = ({ postId, title, hasImage }) => {
-  const { data, isLoading } = useGetFeedImageQuery(
+  const { data, isLoading, isError } = useGetFeedImageQuery(
     { postId },
     { skip: !hasImage }
   )
 
-  if (!hasImage) return null
+  if (!hasImage || isError) return null
 
   if (isLoading) {
     return (

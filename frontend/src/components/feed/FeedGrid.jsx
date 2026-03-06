@@ -5,13 +5,12 @@ import FeedCard from "./FeedCard"
 
 const FeedGrid = ({ posts, width, onOpenPost, onDeletePost, currentUserId, hasMore, loadMore, isFetching }) => {
   return (
-    <Box sx={{ width: width, margin: "auto", height: "100%" }}>
+    <Box sx={{ width: width, margin: "auto" }}>
       <Virtuoso
         data={posts}
-        useWindowScroll={false}
+        useWindowScroll={true}
         endReached={loadMore}
-        increaseViewportBy={200}
-        style={{ height: '100%' }}
+        increaseViewportBy={300}
         itemContent={(index, post) => (
           <Box sx={{ mb: 2 }}>
             <FeedCard 

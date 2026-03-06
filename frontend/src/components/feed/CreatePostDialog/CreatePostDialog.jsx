@@ -1,7 +1,7 @@
 import { Dialog, DialogTitle } from "@mui/material"
 import CreatePostForm from "./CreatePostForm"
 
-const CreatePostDialog = ({ open, onClose }) => {
+const CreatePostDialog = ({ open, onClose, initialText }) => {
   return (
     <Dialog
       open={open}
@@ -15,7 +15,7 @@ const CreatePostDialog = ({ open, onClose }) => {
         }}
     >
       <DialogTitle sx={{ pb: 1.2, fontWeight: 800 }}>Create a New Post</DialogTitle>
-      <CreatePostForm onClose={onClose} />
+      <CreatePostForm onClose={onClose} initialText={initialText} />
     </Dialog>
   )
 }

@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import {
   Alert,
   Button,
@@ -31,7 +32,7 @@ const buildCreatePostFormData = (values) => {
   return formData
 }
 
-const CreatePostForm = ({ onClose }) => {
+const CreatePostForm = ({ onClose, initialText }) => {
   const [createPost, { isLoading }] = useCreatePostMutation()
   const {showSuccess} = useToast();
   const {
@@ -45,6 +46,14 @@ const CreatePostForm = ({ onClose }) => {
     defaultValues: postDefaultValues,
     resolver: yupResolver(createPostSchema),
   })
+
+  useEffect(() => {
+    if (initialText) {
+      reset({ ...postDefaultValues, title: initialText });
+    } else {
+      reset(postDefaultValues);
+    }
+  }, [initialText, reset]);
 
   const onSubmit = async (values) => {
     try {
