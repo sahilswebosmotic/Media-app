@@ -29,15 +29,11 @@ const FeedGrid = ({ posts, width, onOpenPost, onDeletePost, currentUserId, hasMo
             </Box>
           ),
           Scroller: React.forwardRef(({ style, ...props }, ref) => (
-            <div
+            <Box
               {...props}
               ref={ref}
-              style={{
-                ...style,
-                scrollbarWidth: 'none',
-                msOverflowStyle: 'none',
-                WebkitScrollbar: { display: 'none' }
-              }}
+              style={{ ...style, scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              sx={{ '&::-webkit-scrollbar': { display: 'none' } }}
             />
           ))
         }}

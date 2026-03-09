@@ -45,9 +45,7 @@ const Header = () => {
     if (action === 'Profile') {
       navigate('/user-profile')
     }
-    // if (action === 'Discover') {
-    //   navigate('/discover')
-    // }
+
     handleCloseUserMenu()
   }
 

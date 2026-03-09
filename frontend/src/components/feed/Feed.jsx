@@ -31,7 +31,7 @@ const Feed = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
-  }, [page])
+  }, [debouncedSearch])
 
   const { data, isLoading, isError, error, isFetching } = useGetFeedPostsQuery({
     page,
@@ -52,7 +52,7 @@ const Feed = () => {
     } else {
       setPosts((prev) => [...prev, ...data.data.data])
     }
-  },[data])
+  },[data, page])
 
   const totalPosts = data?.data?.total || 0;
   const totalPages = Math.ceil(totalPosts / 5);

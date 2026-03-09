@@ -9,12 +9,11 @@ export const connectSocket = () => {
   const token = Cookies.get("accessToken");
   if (!token) return null;
 
-  // Prevent duplicate connections
-  if (socket?.connected) return socket;
+  if (socket?.connect) return socket;
 
   socket = io(SOCKET_URL, {
     extraHeaders: {
-      token: token,  
+      token: token,
     },
   });
 
