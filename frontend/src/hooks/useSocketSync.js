@@ -10,8 +10,7 @@ export const useSocketSync = () => {
     useEffect(() => {
         if (!socket) return;
 
-        const handleNewPost = (postData) => {
-            // Option A: Invalidate the cache so RTK Query refetches
+        const handleNewPost = () => {
             dispatch(apiSlice.util.invalidateTags(["Posts"]));
         };
 

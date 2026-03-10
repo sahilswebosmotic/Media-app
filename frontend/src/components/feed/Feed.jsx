@@ -24,7 +24,7 @@ const Feed = () => {
     useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(search)
-      setPage(1) // Reset page on search
+      setPage(1)
     }, 400)
     return () => clearTimeout(timer)
   }, [search])
@@ -65,7 +65,6 @@ const Feed = () => {
   };  
 
   const handleDeletePost = (post) => {
-    // remove the post from ui only 
     setPosts(posts.filter((p) => p._id !== post._id))
   }
 

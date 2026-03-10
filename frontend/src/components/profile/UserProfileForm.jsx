@@ -5,7 +5,7 @@ import ProfileActions from './ProfileActions'
 import ProfileDetailsSection from './ProfileDetailsSection'
 import ProfileFeedback from './ProfileFeedback'
 import ProfileHeader from './ProfileHeader'
-import useUserProfilePage from './useUserProfilePage'
+import useUserProfilePage from './hooks/useUserProfilePage'
 
 const UserProfileForm = () => {
   const {

@@ -5,7 +5,6 @@ import { useThemeContext } from '../../context/theme/ThemeContext';
 
 const ThemeToggle = () => {
   const { mode, toggleTheme } = useThemeContext();
-  const theme = useTheme();
 
   return (
     <Tooltip title={`Switch to ${mode === 'light' ? 'dark' : 'light'} mode`}>

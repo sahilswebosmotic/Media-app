@@ -27,7 +27,6 @@ export const postsApi = apiSlice.injectEndpoints({
     }),
   }),
 })
-
 export const {
   useGetFeedPostsQuery,
   useGetFeedImageQuery,

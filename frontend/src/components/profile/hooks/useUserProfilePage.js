@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm, useWatch } from 'react-hook-form'
 import { useGetCurrentUserQuery } from '@store/slice/authApi'
 import { useGetUserImageQuery, useUpdateUserMutation } from '@store/slice/usersApi'
-import { defaultValues, profileSchema } from './profileFormSchema'
+import { defaultValues, profileSchema } from '../profileFormSchema'
 
 const useUserProfilePage = () => {
   const { data, isLoading, isError, error } = useGetCurrentUserQuery()
