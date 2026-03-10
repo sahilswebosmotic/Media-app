@@ -10,9 +10,11 @@ export default defineConfig({
       "@utils": "/src/utils",
       "@components": "/src/components",
       "@context": "/src/context",
-      "@layouts": "/src/layouts",
+      "@layout": "/src/layout",
       "@pages": "/src/pages",
       "@store": "/src/store",
+      "@features": "/src/features",
+      "@theme": "/src/theme",
     },
   },
 });

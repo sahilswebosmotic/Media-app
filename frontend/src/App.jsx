@@ -1,14 +1,14 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import SignIn from '@pages/SignIn'
-import SignUp from '@pages/SignUp'
-import Home from '@pages/Home'
-import UserProfile from '@components/profile/UserProfileForm'
+import LoginPage from '@pages/auth/LoginPage'
+import SignUpPage from '@pages/auth/SignUpPage'
+import HomePage from '@pages/home/HomePage'
+import MyProfilePage from '@pages/profile/MyProfilePage'
 import Layout from './layout/Layout'
 import ProtectedRoute from './routes/ProtectedRoute'
 import PublicRoute from './routes/PublicRoute'
-import Discover from '@pages/Discover'
-import { useSocketSync } from '@hooks/useSocketSync'
-import PublicProfile from '@pages/PublicProfile'
+import DiscoverPage from '@pages/discover/DiscoverPage'
+import { useSocketSync } from '@features/socket/hooks/useSocketSync'
+import PublicProfilePage from '@pages/profile/PublicProfilePage'
 
 function App() {
   useSocketSync();
@@ -16,16 +16,16 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<PublicRoute />}>
-          <Route path='/' element={<SignIn />} />
-          <Route path='/signup' element={<SignUp />} />
+          <Route path='/' element={<LoginPage />} />
+          <Route path='/signup' element={<SignUpPage />} />
         </Route>
 
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
-          <Route path='/home' element={<Home />} />
-          <Route path='/discover' element={<Discover />} />
-          <Route path='/user-profile' element={<UserProfile />} />
-          <Route path='/public-profile/:userId' element={<PublicProfile />} />
+          <Route path='/home' element={<HomePage />} />
+          <Route path='/discover' element={<DiscoverPage />} />
+          <Route path='/user-profile' element={<MyProfilePage />} />
+          <Route path='/public-profile/:userId' element={<PublicProfilePage />} />
         </Route>
         </Route>
 

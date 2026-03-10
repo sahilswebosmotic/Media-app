@@ -5,11 +5,12 @@
       "@hooks/*": ["src/hooks/*"],
       "@utils/*": ["src/utils/*"],
       "@components/*": ["src/components/*"],
-      "@services/*": ["src/services/*"],
       "@context/*": ["src/context/*"],
-      "@layouts/*": ["src/layouts/*"],
+      "@layout/*": ["src/layout/*"],
       "@pages/*": ["src/pages/*"],
-      "@store/*": ["src/store/*"]
+      "@store/*": ["src/store/*"],
+      "@features/*": ["src/features/*"],
+      "@theme/*": ["src/theme/*"]
     }
   }
 }

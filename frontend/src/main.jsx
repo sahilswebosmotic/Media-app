@@ -4,15 +4,16 @@ import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
 import { Provider } from 'react-redux'
 import App from './App.jsx'
 import { store } from '@store/store'
-import { AuthProvider } from './context/auth/AuthContext'
-import { ToastProvider } from './context/toast/ToastContext.jsx'
-import { SocketProvider } from '@context/socket/SocketContext.jsx'
+import { AuthProvider } from '@features/auth/context/AuthContext'
+import { ToastProvider } from '@context/toast/ToastContext'
+import { SocketProvider } from '@features/socket/context/SocketContext'
 
-import { getTheme } from './theme'
-import { CustomThemeProvider, useThemeContext } from './context/theme/ThemeContext'
+import { getTheme } from '@theme/theme'
+import { CustomThemeProvider } from '@theme/ThemeContext'
+import { useTheme } from '@theme/useTheme'
 
 const ThemedApp = () => {
-  const { mode } = useThemeContext()
+  const { mode } = useTheme()
   const theme = useMemo(() => getTheme(mode), [mode])
 
   return (

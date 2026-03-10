@@ -5,7 +5,7 @@ import {
   Box,
 } from '@mui/material'
 import { useState } from 'react'
-import { useAuth } from '@context/auth/useAuth'
+import { useAuth } from '@features/auth/context/useAuth'
 import { useLocation, useNavigate } from 'react-router-dom'
 import AppBrand from './components/AppBrand'
 import MobileNavMenu from './components/MobileNavMenu'

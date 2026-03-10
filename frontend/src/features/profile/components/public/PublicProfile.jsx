@@ -1,0 +1,84 @@
+import React, { useState } from "react";
+import { Container, Box } from "@mui/material";
+import { useParams } from "react-router-dom";
+
+import { useGetUserImageQuery, useGetUserQuery } from "@features/profile/api/users.api";
+import { useGetFeedPostsQuery } from "@features/feed/api/posts.api";
+
+import PublicProfileHeader from "./PublicProfileHeader";
+import PublicProfilePosts from "./PublicProfilePosts";
+import PostDetailModal from "./PostDetailModal";
+
+export default function PublicProfile() {
+  const { userId } = useParams();
+
+  const [page] = useState(1);
+  const [open, setOpen] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
+
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedPost(null);
+  };
+
+  const handleOpen = (post) => {
+    setSelectedPost(post);
+    setOpen(true);
+  };
+
+  const {
+    data: profileData,
+    isLoading: profileLoading,
+    isError: profileError,
+  } = useGetUserQuery({ userId });
+
+  const { data: imageData, isLoading: imageLoading } =
+    useGetUserImageQuery({ userId });
+
+  const {
+    data: postsResponse,
+    isLoading: postsLoading,
+    isError: postsError,
+  } = useGetFeedPostsQuery({
+    userId,
+    page,
+    perPage: 5,
+  });
+
+  const posts = postsResponse?.data?.data || [];
+  console.log(posts);
+  const userPost = posts.filter((post) => post.userId === userId);
+  const totalPosts = userPost.length;
+
+  return (
+    <>
+      <Container maxWidth="lg">
+        <Box sx={{ mt: 4 }}>
+          <PublicProfileHeader
+            profileData={profileData}
+            imageData={imageData}
+            totalPosts={totalPosts}
+            profileLoading={profileLoading}
+            profileError={profileError}
+            imageLoading={imageLoading}
+          />
+
+          <PublicProfilePosts
+            posts={userPost}
+            isLoading={postsLoading}
+            isError={postsError}
+            onOpenPost={handleOpen}
+          />
+        </Box>
+      </Container>
+
+      <PostDetailModal
+        open={open}
+        onClose={handleClose}
+        post={selectedPost}
+      />
+    </>
+  );
+}
+
+

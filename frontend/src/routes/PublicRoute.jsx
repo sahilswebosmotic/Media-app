@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import { useAuth } from '@context/auth/useAuth'
+import { useAuth } from '@features/auth/context/useAuth'
 
 const PublicRoute = () => {
   const { isAuthenticated, isInitializing } = useAuth()
