@@ -6,25 +6,11 @@ import { useGetUserImageQuery, useGetUserQuery } from "@features/profile/api/use
 import { useGetFeedPostsQuery } from "@features/feed/api/posts.api";
 
 import PublicProfileHeader from "./PublicProfileHeader";
-import PublicProfilePosts from "./PublicProfilePosts";
-import PostDetailModal from "./PostDetailModal";
 
 export default function PublicProfile() {
   const { userId } = useParams();
 
   const [page] = useState(1);
-  const [open, setOpen] = useState(false);
-  const [selectedPost, setSelectedPost] = useState(null);
-
-  const handleClose = () => {
-    setOpen(false);
-    setSelectedPost(null);
-  };
-
-  const handleOpen = (post) => {
-    setSelectedPost(post);
-    setOpen(true);
-  };
 
   const {
     data: profileData,
@@ -62,21 +48,8 @@ export default function PublicProfile() {
             profileError={profileError}
             imageLoading={imageLoading}
           />
-
-          <PublicProfilePosts
-            posts={userPost}
-            isLoading={postsLoading}
-            isError={postsError}
-            onOpenPost={handleOpen}
-          />
         </Box>
       </Container>
-
-      <PostDetailModal
-        open={open}
-        onClose={handleClose}
-        post={selectedPost}
-      />
     </>
   );
 }

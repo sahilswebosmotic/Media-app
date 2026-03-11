@@ -1,6 +1,7 @@
 import { Card, CardContent, Typography, Button, Stack, Chip } from "@mui/material"
 import FeedImage from "./FeedImage"
 import { useGetCurrentUserQuery } from "@features/auth/api/auth.api"
+import DateFormatter from "@components/ui/DateFormatter"
 
 export default function FeedCard({ post, onOpen, onDelete }) {
   const { data: currentUserData } = useGetCurrentUserQuery()
@@ -43,7 +44,7 @@ export default function FeedCard({ post, onOpen, onDelete }) {
             />
           </Stack>
           <Typography variant="caption" color="text.secondary">
-            {post.createdAt.slice(0, 10)}
+            <DateFormatter date={post.createdAt} />
           </Typography>
 
           <Stack direction="row" spacing={1}>
