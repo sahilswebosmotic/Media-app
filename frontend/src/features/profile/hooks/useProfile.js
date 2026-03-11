@@ -1,7 +1,9 @@
-import { useMemo } from 'react'
 import useProfileData from './useProfileData.js'
 import useProfileState from './useProfileState.js'
 import useProfileForm from './useProfileForm.js'
+import { useEffect, useMemo } from 'react'
+
+const profileChannel = new BroadcastChannel('profile_updates')
 
 export default function useProfile() {
   const {
@@ -60,6 +62,8 @@ export default function useProfile() {
       setRemoveAvatar(false)
       setIsEditing(false)
       setSuccessMessage('Profile updated successfully.')
+      console.log('Broadcasting profile update...')
+      profileChannel.postMessage({ type: 'PROFILE_UPDATED' })
     } catch (updateError) {
       setSubmitError(updateError?.data?.message || 'Unable to update profile.')
     }

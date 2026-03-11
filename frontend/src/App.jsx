@@ -8,10 +8,12 @@ import ProtectedRoute from './routes/ProtectedRoute'
 import PublicRoute from './routes/PublicRoute'
 import DiscoverPage from '@pages/discover/DiscoverPage'
 import useSocketSync from '@features/socket/hooks/useSocketSync'
+import useProfileSync from '@features/profile/hooks/useProfileSync'
 import PublicProfilePage from '@pages/profile/PublicProfilePage'
 
 function App() {
   useSocketSync();
+  useProfileSync();
   return (
     <BrowserRouter>
       <Routes>

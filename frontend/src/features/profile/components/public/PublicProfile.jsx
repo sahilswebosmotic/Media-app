@@ -6,8 +6,7 @@ import { useGetUserImageQuery, useGetUserQuery } from "@features/profile/api/use
 import { useGetFeedPostsQuery } from "@features/feed/api/posts.api";
 
 import PublicProfileHeader from "./PublicProfileHeader";
-import PublicProfilePosts from "./PublicProfilePosts";
-import PostDetailModal from "./PostDetailModal";
+
 
 export default function PublicProfile() {
   const { userId } = useParams();
@@ -63,20 +62,9 @@ export default function PublicProfile() {
             imageLoading={imageLoading}
           />
 
-          <PublicProfilePosts
-            posts={userPost}
-            isLoading={postsLoading}
-            isError={postsError}
-            onOpenPost={handleOpen}
-          />
         </Box>
       </Container>
 
-      <PostDetailModal
-        open={open}
-        onClose={handleClose}
-        post={selectedPost}
-      />
     </>
   );
 }
