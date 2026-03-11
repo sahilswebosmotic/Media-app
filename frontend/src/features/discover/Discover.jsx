@@ -9,7 +9,7 @@ import React from "react";
 import UserCard from "./components/UserCard";
 import { useGetAllUsersQuery } from "@features/profile/api/users.api";
 
-const Discover = () => {
+export default function Discover () {
   const { data: usersResponse, isLoading, isError } = useGetAllUsersQuery();
 
   const users = usersResponse?.data || [];
@@ -60,4 +60,3 @@ const Discover = () => {
   );
 };
 
-export default Discover;

@@ -15,7 +15,7 @@ import { LOGIN_FIELDS } from '../common/form.fields'
 import AuthError from './AuthError'
 
 
-const LoginForm = () => {
+export default function LoginForm () {
   const navigate = useNavigate()
   const { login } = useAuth()
   const [loginUser, { isLoading }] = useLoginMutation()
@@ -75,4 +75,3 @@ const LoginForm = () => {
   )
 }
 
-export default LoginForm

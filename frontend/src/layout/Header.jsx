@@ -14,7 +14,7 @@ import UserMenu from './components/UserMenu'
 import ThemeToggle from './components/ThemeToggle'
 import { NAV_LINKS, USER_MENU_ACTIONS } from './navConfig'
 
-const Header = () => {
+export default function Header() {
   const { logout, user } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
@@ -94,4 +94,3 @@ const Header = () => {
   )
 }
 
-export default Header

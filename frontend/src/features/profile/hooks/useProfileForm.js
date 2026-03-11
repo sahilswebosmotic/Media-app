@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm, useWatch } from 'react-hook-form'
 import { defaultValues, profileSchema } from '../validation/profile.schema'
 
-export const useProfileForm = (profileValues, onSubmitHandler) => {
+export default function useProfileForm(profileValues, onSubmitHandler) {
   const {
     control,
     register,

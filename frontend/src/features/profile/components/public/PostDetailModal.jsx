@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import FeedImage from "@features/feed/components/FeedImage";
 
-const PostDetailModal = ({ open, onClose, post }) => {
+export default function PostDetailModal({ open, onClose, post }) {
   if (!post) return null;
 
   return (
@@ -65,4 +65,4 @@ const PostDetailModal = ({ open, onClose, post }) => {
   );
 };
 
-export default PostDetailModal;
+

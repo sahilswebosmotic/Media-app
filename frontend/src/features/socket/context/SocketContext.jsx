@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { connectSocket, disconnectSocket } from "../utils/socket";
 import { useAuth } from "@features/auth/context/useAuth";
 
@@ -10,7 +10,7 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      const s = connectSocket();
+      const s = connectSocket();  
       setSocket(s);
     } else {
       disconnectSocket();

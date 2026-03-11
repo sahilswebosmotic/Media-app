@@ -1,6 +1,6 @@
 import FormInput from "@components/ui/FormInput";
 
-const AuthFieldList = ({ fields, register, errors }) => {
+export default function AuthFieldList ({ fields, register, errors }) {
     return fields.map((field) => (
         <FormInput
             key={field.name}
@@ -13,4 +13,4 @@ const AuthFieldList = ({ fields, register, errors }) => {
     ));
 };
 
-export default AuthFieldList;
+

@@ -1,6 +1,6 @@
 import { Avatar, Box, Divider, IconButton, Menu, MenuItem, Tooltip, Typography, alpha } from '@mui/material'
 
-const UserMenu = ({ user, actions, anchorEl, onOpen, onClose, onAction }) => {
+export default function UserMenu({ user, actions, anchorEl, onOpen, onClose, onAction }) {
   return (
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title='Open settings'>
@@ -49,5 +49,3 @@ const UserMenu = ({ user, actions, anchorEl, onOpen, onClose, onAction }) => {
     </Box>
   )
 }
-
-export default UserMenu

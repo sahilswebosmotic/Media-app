@@ -9,14 +9,14 @@ import {
   alpha,
 } from "@mui/material";
 
-const PublicProfileHeader = ({
+export default function PublicProfileHeader({
   profileData,
   imageData,
   totalPosts,
   profileLoading,
   profileError,
   imageLoading,
-}) => {
+}) {
   return (
     <Paper elevation={2} sx={{ p: 4, borderRadius: 3, mb: 4 }}>
       <Grid container spacing={4} alignItems="center">
@@ -95,5 +95,4 @@ const PublicProfileHeader = ({
     </Paper>
   );
 };
-
-export default PublicProfileHeader;
+;

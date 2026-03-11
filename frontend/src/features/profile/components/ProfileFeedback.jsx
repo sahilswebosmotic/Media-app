@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useToast } from '@context/toast/useToast'
 
-const ProfileFeedback = ({ successMessage, submitError, fileErrorMessage }) => {
+export default function ProfileFeedback({ successMessage, submitError, fileErrorMessage }) {
   const { showError, showSuccess } = useToast()
 
   useEffect(() => {
@@ -18,5 +18,3 @@ const ProfileFeedback = ({ successMessage, submitError, fileErrorMessage }) => {
 
   return null  
 }
-
-export default ProfileFeedback

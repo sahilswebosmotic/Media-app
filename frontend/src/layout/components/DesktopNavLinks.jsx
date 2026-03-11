@@ -1,7 +1,7 @@
 import { Box, Button, alpha } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 
-const DesktopNavLinks = ({ links, pathname }) => {
+export default function DesktopNavLinks({ links, pathname }) {
   return (
     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
       {links.map((link) => (
@@ -34,4 +34,3 @@ const DesktopNavLinks = ({ links, pathname }) => {
   )
 }
 
-export default DesktopNavLinks

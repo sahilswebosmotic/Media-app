@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Chip, Stack, Typography, alpha } from '@mui/material'
 
-const ProfileHeader = ({ isPrivate }) => {
+export default function ProfileHeader({ isPrivate }) {
   return (
     <Box
       sx={{
@@ -29,5 +29,3 @@ const ProfileHeader = ({ isPrivate }) => {
     </Box>
   )
 }
-
-export default ProfileHeader

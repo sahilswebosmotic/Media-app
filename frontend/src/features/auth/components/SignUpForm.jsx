@@ -19,7 +19,7 @@ import { SIGNUP_FIELDS } from '../common/form.fields'
 import AuthError from './AuthError'
 
 
-const SignUpForm = () => {
+export default function SignUpForm () {
   const navigate = useNavigate()
   const [signUpUser, { isLoading }] = useSignUpMutation()
   const {showSuccess} = useToast();
@@ -82,5 +82,3 @@ const SignUpForm = () => {
     </AuthFormCard>
   )
 }
-
-export default SignUpForm

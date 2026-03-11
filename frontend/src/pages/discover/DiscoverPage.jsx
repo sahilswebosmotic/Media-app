@@ -1,12 +1,11 @@
 import React from "react";
 import Discover from "@features/discover/Discover";
 
-const DiscoverPage = () => {
+export default function DiscoverPage() {
 
 
   return (
     <Discover/>
-  );
+  );  
 };
 
-export default DiscoverPage;

@@ -1,10 +1,6 @@
 import { Typography } from '@mui/material';
 
-/**
- * AuthError component displays a central, subtle error message
- * mimicking Instagram's general error display for input fields.
- */
-const AuthError = ({ message }) => {
+export default function AuthError ({ message }) {
   if (!message) return null;
   
   return (
@@ -30,5 +26,3 @@ const AuthError = ({ message }) => {
     </Typography>
   );
 };
-
-export default AuthError;

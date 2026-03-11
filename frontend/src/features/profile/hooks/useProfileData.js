@@ -1,7 +1,7 @@
 import { useGetCurrentUserQuery } from '@features/auth/api/auth.api'
 import { useGetUserImageQuery, useUpdateUserMutation } from '@features/profile/api/users.api'
 
-export const useProfileData = () => {
+export default function useProfileData() {
   const { data, isLoading, isError, error } = useGetCurrentUserQuery()
   const { data: userImageData } = useGetUserImageQuery()
   const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation()

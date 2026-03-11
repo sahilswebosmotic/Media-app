@@ -1,11 +1,10 @@
 
 import SignInForm from "@features/auth/components/LoginForm";
 
-
-const LoginPage = () => {
+export default function LoginPage() {
     return (
         <SignInForm/>
     );
 }
 
-export default LoginPage;
+  

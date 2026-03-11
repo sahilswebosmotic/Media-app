@@ -1,9 +1,9 @@
 import { useMemo } from 'react'
-import { useProfileData } from './useProfileData'
-import { useProfileState } from './useProfileState'
-import { useProfileForm } from './useProfileForm'
+import useProfileData from './useProfileData.js'
+import useProfileState from './useProfileState.js'
+import useProfileForm from './useProfileForm.js'
 
-const useProfile = () => {
+export default function useProfile() {
   const {
     data,
     isLoading,
@@ -107,7 +107,7 @@ const useProfile = () => {
   const handleFileChange = (event) => {
     const file = event.target.files?.[0]
     if (!file) return
-    
+
     resetMessages()
     setRemoveAvatar(false)
     setValue('profilePhotoFile', file, { shouldDirty: true, shouldValidate: true })
@@ -152,4 +152,3 @@ const useProfile = () => {
   }
 }
 
-export default useProfile

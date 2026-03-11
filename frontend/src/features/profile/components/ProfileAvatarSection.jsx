@@ -1,7 +1,7 @@
 import React from 'react'
 import { Avatar, Button, Stack, Typography, alpha } from '@mui/material'
 
-const ProfileAvatarSection = ({
+export default function ProfileAvatarSection({
   avatarSource,
   avatarAlt,
   isEditing,
@@ -12,7 +12,7 @@ const ProfileAvatarSection = ({
   profilePreview,
   onFileChange,
   onRemoveAvatar,
-}) => {
+}) {
   return (
     <Stack
       spacing={2}
@@ -65,4 +65,4 @@ const ProfileAvatarSection = ({
   )
 }
 
-export default ProfileAvatarSection
+

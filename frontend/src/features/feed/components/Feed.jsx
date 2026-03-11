@@ -1,27 +1,26 @@
 
-import { Box, Stack, Typography, Button, CircularProgress, Alert ,useMediaQuery, TextField, InputAdornment,
-  useTheme, alpha } from "@mui/material"
-  import SearchIcon from "@mui/icons-material/Search"
+import { Box, Stack, Typography, Button, Alert, useMediaQuery, useTheme } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useGetFeedPostsQuery } from "@features/feed/api/posts.api"
-import { useGetCurrentUserQuery } from "@features/auth/api/auth.api"
+import SearchBar from "../../../components/ui/SearchBar"
+import LoadingScreen from "../../../components/ui/LoadingScreen"
 import FeedGrid from "./FeedGrid"
 import PostDialog from "./PostDialog"
 import CreatePostDialog from './CreatePostDialog/CreatePostDialog';
 
-const Feed = () => {
+export default function Feed() {
   const theme = useTheme()
   const isMdDown = useMediaQuery(theme.breakpoints.down('md'))
   const isSmDown = useMediaQuery(theme.breakpoints.down('sm'))
   const [selectedPost, setSelectedPost] = useState(null)
   const [isCreateOpen, setIsCreateOpen] = useState(false)
-  const [posts,setPosts] = useState([])
-  const [page,setPage] = useState(1)
+  const [posts, setPosts] = useState([])
+  const [page, setPage] = useState(1)
 
-    const [search, setSearch] = useState('')
+  const [search, setSearch] = useState('')
   const [debouncedSearch, setDebouncedSearch] = useState('')
 
-    useEffect(() => {
+  useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(search)
       setPage(1)
@@ -38,13 +37,10 @@ const Feed = () => {
     perPage: 5,
     search: debouncedSearch,
   })
-  const width = isSmDown ? "100%" :isMdDown ?"70%" :"60%"
-  
-  const { data: currentUserData } = useGetCurrentUserQuery()
-  const currentUserId = currentUserData?.data?._id
+  const width = isSmDown ? "100%" : isMdDown ? "70%" : "60%"
 
 
-  useEffect(()=>{
+  useEffect(() => {
     if (!data?.data?.data) return
 
     if (page === 1) {
@@ -52,7 +48,7 @@ const Feed = () => {
     } else {
       setPosts((prev) => [...prev, ...data.data.data])
     }
-  },[data, page])
+  }, [data, page])
 
   const totalPosts = data?.data?.total || 0;
   const totalPages = Math.ceil(totalPosts / 5);
@@ -62,7 +58,7 @@ const Feed = () => {
     if (hasMore && !isLoading && !isFetching && page < totalPages) {
       setPage((prev) => prev + 1);
     }
-  };  
+  };
 
   const handleDeletePost = (post) => {
     setPosts(posts.filter((p) => p._id !== post._id))
@@ -70,11 +66,7 @@ const Feed = () => {
 
 
   if (isLoading && page === 1) {
-    return (
-      <Box sx={{ minHeight: "45vh", display: "grid", placeItems: "center" }}>
-        <CircularProgress />
-      </Box>
-    )
+    return <LoadingScreen />
   }
   if (isError) return <Alert severity="error">{error?.data?.message}</Alert>
 
@@ -101,39 +93,15 @@ const Feed = () => {
           </Button>
         </Stack>
 
-        <TextField
-          id="feed-search"
+        <SearchBar
           placeholder="Search posts by title…"
-          size="medium"
-          fullWidth
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          slotProps={{
-            input: {
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon sx={{ color: 'primary.main', fontSize: 22 }} />
-                </InputAdornment>
-              ),
-            },
-          }}
-          sx={{ 
-            mb: 4, 
-            maxWidth: 600, 
+          sx={{
+            mb: 4,
+            maxWidth: 600,
             mx: "auto",
-            display: "flex",
-            '& .MuiOutlinedInput-root': {
-              bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(15, 23, 42, 0.48)' : 'rgba(255, 255, 255, 0.7)',
-              backdropFilter: 'blur(8px)',
-              transition: 'all 0.2s ease',
-              '&:hover': {
-                bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(15, 23, 42, 0.6)' : 'rgba(255, 255, 255, 0.9)',
-              },
-              '&.Mui-focused': {
-                bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(15, 23, 42, 0.8)' : '#fff',
-                boxShadow: theme => `0 0 0 4px ${alpha(theme.palette.primary.main, 0.1)}`,
-              }
-            }
+            display: "flex"
           }}
         />
       </Box>
@@ -144,7 +112,6 @@ const Feed = () => {
           width={width}
           onOpenPost={setSelectedPost}
           onDeletePost={handleDeletePost}
-          currentUserId={currentUserId}
           hasMore={hasMore}
           loadMore={loadMore}
           isFetching={isFetching}
@@ -165,5 +132,5 @@ const Feed = () => {
   )
 }
 
-export default Feed
+
 

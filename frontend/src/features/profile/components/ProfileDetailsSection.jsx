@@ -36,7 +36,7 @@ const readonlyFieldSx = {
   },
 }
 
-const ProfileDetailsSection = ({
+export default function ProfileDetailsSection({
   isEditing,
   register,
   errors,
@@ -44,7 +44,7 @@ const ProfileDetailsSection = ({
   email,
   createdAt,
   updatedAt,
-}) => {
+}) {
   return (
     <Stack spacing={2}>
       {isEditing ? (
@@ -123,5 +123,3 @@ const ProfileDetailsSection = ({
     </Stack>
   )
 }
-
-export default ProfileDetailsSection

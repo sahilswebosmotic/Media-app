@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 
-const AppBrand = ({ mobile = false }) => {
+export default function AppBrand({ mobile = false }) {
   const display = mobile ? { xs: 'flex', md: 'none' } : { xs: 'none', md: 'flex' }
 
   return (
@@ -36,4 +36,3 @@ const AppBrand = ({ mobile = false }) => {
   )
 }
 
-export default AppBrand

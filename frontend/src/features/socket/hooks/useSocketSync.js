@@ -3,7 +3,7 @@ import { useSocket } from "../context/useSocket";
 import { useDispatch } from "react-redux";
 import { apiSlice } from "@store/api/apiSlice";
 
-export const useSocketSync = () => {
+export default function useSocketSync() {
     const socket = useSocket();
     const dispatch = useDispatch();
 

@@ -1,6 +1,6 @@
 import { Box, Paper, Typography } from "@mui/material";
 
-const AuthFormCard = ({ title, subtitle, children }) => {
+export default function AuthFormCard ({ title, subtitle, children }) {
     return (
         <Box
             sx={{
@@ -57,4 +57,3 @@ const AuthFormCard = ({ title, subtitle, children }) => {
     );
 };
 
-export default AuthFormCard;

@@ -1,7 +1,7 @@
 import { Box, CircularProgress, CardMedia } from "@mui/material"
 import { useGetFeedImageQuery } from "@features/feed/api/posts.api"
 
-const FeedImage = ({ postId, title, hasImage }) => {
+export default function FeedImage({ postId, title, hasImage }) {
   const { data, isLoading } = useGetFeedImageQuery(
     { postId },
     { skip: !hasImage }
@@ -29,4 +29,4 @@ const FeedImage = ({ postId, title, hasImage }) => {
   )
 }
 
-export default FeedImage
+

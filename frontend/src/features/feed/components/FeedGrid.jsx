@@ -3,7 +3,7 @@ import { Box, CircularProgress, ImageList, ImageListItem } from "@mui/material"
 import { Virtuoso } from "react-virtuoso"
 import FeedCard from "./FeedCard"
 
-const FeedGrid = ({ posts, width, onOpenPost, onDeletePost, currentUserId, hasMore, loadMore, isFetching }) => {
+export default function FeedGrid({ posts, width, onOpenPost, onDeletePost, hasMore, loadMore, isFetching }) {
   return (
     <Box sx={{ width: width, margin: "auto", height: "100%" }}>
       <Virtuoso
@@ -14,11 +14,10 @@ const FeedGrid = ({ posts, width, onOpenPost, onDeletePost, currentUserId, hasMo
         style={{ height: '100%' }}
         itemContent={(index, post) => (
           <Box sx={{ mb: 2 }}>
-            <FeedCard 
-              post={post} 
-              onOpen={onOpenPost} 
-              onDelete={onDeletePost} 
-              currentUserId={currentUserId} 
+            <FeedCard
+              post={post}
+              onOpen={onOpenPost}
+              onDelete={onDeletePost}
             />
           </Box>
         )}
@@ -42,4 +41,4 @@ const FeedGrid = ({ posts, width, onOpenPost, onDeletePost, currentUserId, hasMo
   )
 }
 
-export default FeedGrid
+

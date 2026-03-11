@@ -13,7 +13,7 @@ import { useGetUserImageQuery } from "@features/profile/api/users.api";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const UserCard = ({ item }) => {
+export default function UserCard ({ item }) {
   const navigate = useNavigate();
   const { data: imageData, isLoading: imageLoading } = useGetUserImageQuery({
     userId: item._id,
@@ -103,4 +103,3 @@ const UserCard = ({ item }) => {
   );
 };
 
-export default UserCard;

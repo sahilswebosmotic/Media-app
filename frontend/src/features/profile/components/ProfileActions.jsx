@@ -1,14 +1,14 @@
 import React from 'react'
 import { Button, Stack } from '@mui/material'
 
-const ProfileActions = ({
+export default function ProfileActions({
   isEditing,
   isUpdating,
   isDirty,
   removeAvatar, 
-  onEdit, 
+  onEdit,   
   onCancel,
-}) => {
+}) {
 
   
 
@@ -34,4 +34,3 @@ const ProfileActions = ({
   )
 }
 
-export default ProfileActions

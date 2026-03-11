@@ -15,7 +15,7 @@ import PostImageUpload from "./PostImageUpload"
 import FormInput from "@components/ui/FormInput"
 import { useToast } from "@context/toast/useToast"
  
-const buildCreatePostFormData = (values) => {
+  export default function buildCreatePostFormData(values) {
   const formData = new FormData()
   formData.append("title", values.title)
   formData.append("isPrivate", values.isPrivate ? "true" : "false")
@@ -105,4 +105,3 @@ const CreatePostForm = ({ onClose }) => {
   )
 }
 
-export default CreatePostForm

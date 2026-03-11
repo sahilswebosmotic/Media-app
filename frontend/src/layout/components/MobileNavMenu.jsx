@@ -1,7 +1,7 @@
 import { Box, IconButton, Menu, MenuItem, Typography } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 
-const MobileNavMenu = ({ links, anchorEl, onOpen, onClose }) => {
+export default function MobileNavMenu({ links, anchorEl, onOpen, onClose }) {
   return (
     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
       <IconButton
@@ -43,4 +43,3 @@ const MobileNavMenu = ({ links, anchorEl, onOpen, onClose }) => {
   )
 }
 
-export default MobileNavMenu

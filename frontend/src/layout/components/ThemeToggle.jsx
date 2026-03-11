@@ -1,9 +1,8 @@
-import React from 'react';
 import { IconButton, Tooltip, useTheme } from '@mui/material';
 import { DarkModeOutlined as DarkModeIcon, LightModeOutlined as LightModeIcon } from '@mui/icons-material';
 import { useTheme as useThemeMode } from '@theme/useTheme';
 
-const ThemeToggle = () => {
+export default function ThemeToggle() {
   const { mode, toggleTheme } = useThemeMode();
 
   return (
@@ -28,4 +27,3 @@ const ThemeToggle = () => {
   );
 };
 
-export default ThemeToggle;

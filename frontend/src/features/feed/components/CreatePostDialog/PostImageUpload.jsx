@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Button, CardMedia, Alert } from "@mui/material"
 
 
-const PostImageUpload = ({ error, value, onChange }) => {
+export default function PostImageUpload({ error, value, onChange }) {
   const [previewUrl, setPreviewUrl] = useState("")
 
   useEffect(() => {
@@ -56,4 +56,3 @@ const PostImageUpload = ({ error, value, onChange }) => {
   )
 }
 
-export default PostImageUpload

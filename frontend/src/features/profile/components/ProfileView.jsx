@@ -7,7 +7,7 @@ import ProfileFeedback from './ProfileFeedback'
 import ProfileHeader from './ProfileHeader'
 import useProfile from '../hooks/useProfile'
 
-const ProfileView = () => {
+export default function ProfileView() {
   const {
     currentUser,
     isLoading,
@@ -127,5 +127,4 @@ const ProfileView = () => {
   )
 }
 
-export default ProfileView
 

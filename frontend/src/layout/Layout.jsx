@@ -4,7 +4,7 @@ import Footer from './Footer'
 import { Outlet } from 'react-router-dom'
 import { Box } from '@mui/material'
 
-const Layout = () => {
+export default function Layout() {
   return (
     <Box
       sx={{
@@ -23,4 +23,4 @@ const Layout = () => {
   )
 }
 
-export default Layout
+

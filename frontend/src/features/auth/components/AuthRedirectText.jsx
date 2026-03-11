@@ -1,6 +1,6 @@
 import { Link, Typography } from "@mui/material";
 
-const AuthRedirectText = ({ prompt, linkLabel, onClick }) => {
+export default function AuthRedirectText ({ prompt, linkLabel, onClick }) {
     return (
         <Typography variant="body2" textAlign="center" sx={{ mt: 1.4, color: "text.secondary" }}>
             {prompt}{" "}
@@ -25,4 +25,3 @@ const AuthRedirectText = ({ prompt, linkLabel, onClick }) => {
     );
 };
 
-export default AuthRedirectText;

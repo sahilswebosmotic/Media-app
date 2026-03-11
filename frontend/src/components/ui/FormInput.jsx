@@ -2,13 +2,13 @@ import {
   TextField,
 } from "@mui/material";
 
-const FormInput = ({
+export default function FormInput ({
   label,
   name,
   type = "text",
   register,
   error,
-}) => {
+}) {
   return (
     <TextField
       label={label}
@@ -21,4 +21,3 @@ const FormInput = ({
     />
   );
 };
-export default FormInput;

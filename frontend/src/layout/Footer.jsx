@@ -1,9 +1,8 @@
 import { Box, Container, Stack, Typography } from '@mui/material'
-import React from 'react'
 import FooterLinks from './components/FooterLinks'
 import { NAV_LINKS } from './navConfig'
 
-const Footer = () => {
+export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
@@ -39,5 +38,3 @@ const Footer = () => {
     </Box>
   )
 }
-
-export default Footer

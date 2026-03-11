@@ -1,7 +1,7 @@
 import { Link, Stack } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 
-const FooterLinks = ({ links }) => {
+export default function FooterLinks({ links }) {
   return (
     <Stack direction='row' spacing={2}>
       {links.map((link) => (
@@ -30,4 +30,3 @@ const FooterLinks = ({ links }) => {
   )
 }
 
-export default FooterLinks

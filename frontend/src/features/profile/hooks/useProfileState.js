@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export const useProfileState = () => {
+export default function useProfileState() {
   const [isEditing, setIsEditing] = useState(false)
   const [profilePreview, setProfilePreview] = useState('')
   const [removeAvatar, setRemoveAvatar] = useState(false)

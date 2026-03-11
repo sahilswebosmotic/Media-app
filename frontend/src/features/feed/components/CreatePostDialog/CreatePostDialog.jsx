@@ -1,18 +1,16 @@
-import { Dialog, DialogTitle } from "@mui/material"
 import CreatePostForm from "./CreatePostForm"
+import BaseDialog from "../../../../components/ui/BaseDialog"
 
-const CreatePostDialog = ({ open, onClose }) => {
+export default function CreatePostDialog({ open, onClose }) {
   return (
-    <Dialog
+    <BaseDialog
       open={open}
       onClose={onClose}
-      fullWidth
-      maxWidth="sm"
+      title="Create a New Post"
     >
-      <DialogTitle sx={{ pb: 1.2, fontWeight: 800 }}>Create a New Post</DialogTitle>
       <CreatePostForm onClose={onClose} />
-    </Dialog>
+    </BaseDialog>
   )
 }
 
-export default CreatePostDialog
+

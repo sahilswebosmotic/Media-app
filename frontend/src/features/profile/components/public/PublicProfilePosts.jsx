@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import PublicPostCard from "./PublicPostCard";
 
-const PublicProfilePosts = ({ posts, isLoading, isError, onOpenPost }) => {
+export default function PublicProfilePosts({ posts, isLoading, isError, onOpenPost }) {
   return (
     <Box>
       <Typography variant="h5" sx={{ fontWeight: 700, mb: 2 }}>
@@ -50,4 +50,4 @@ const PublicProfilePosts = ({ posts, isLoading, isError, onOpenPost }) => {
   );
 };
 
-export default PublicProfilePosts;
+
