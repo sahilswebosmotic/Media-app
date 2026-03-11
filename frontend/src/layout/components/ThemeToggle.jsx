@@ -1,4 +1,4 @@
-import { IconButton, Tooltip, useTheme } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import { DarkModeOutlined as DarkModeIcon, LightModeOutlined as LightModeIcon } from '@mui/icons-material';
 import { useTheme as useThemeMode } from '@theme/useTheme';
 

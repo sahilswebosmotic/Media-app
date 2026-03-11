@@ -49,9 +49,7 @@ export default function LoginForm () {
   return (
     <AuthFormCard title='Sign In' subtitle='Login to your account'>
       <Stack component='form' onSubmit={handleSubmit(onSubmit)} noValidate spacing={1.6}>
-        {/* <Alert varian'> */}
           <AuthError message={errors.root?.apiError?.message} />
-          {/* </Alert> */}
 
         <AuthFieldList fields={LOGIN_FIELDS} register={register} errors={errors} />
 

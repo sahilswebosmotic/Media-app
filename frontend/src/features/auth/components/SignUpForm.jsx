@@ -40,9 +40,7 @@ export default function SignUpForm () {
       navigate('/')
     } catch (error) {
       setError('root.apiError', {
-        message: 
-        // error?.data?.message ||
-         'Invalid Credentials Please try again.',
+        message: 'Invalid Credentials Please try again.',
       })
     }
   }
