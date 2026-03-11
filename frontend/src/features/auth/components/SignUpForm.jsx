@@ -38,7 +38,7 @@ export default function SignUpForm () {
       await signUpUser(values).unwrap()
       showSuccess("Signup successful. Please login.");
       navigate('/')
-    } catch (error) {
+    } catch {
       setError('root.apiError', {
         message: 'Invalid Credentials Please try again.',
       })

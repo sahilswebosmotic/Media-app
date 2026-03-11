@@ -3,7 +3,7 @@ import { Box, CircularProgress, ImageList, ImageListItem } from "@mui/material"
 import { Virtuoso } from "react-virtuoso"
 import FeedCard from "./FeedCard"
 
-export default function FeedGrid({ posts, width, onOpenPost, onDeletePost, hasMore, loadMore, isFetching }) {
+export default function FeedGrid({ posts, width, onOpenPost, onDeletePost, loadMore, isFetching }) {
   return (
     <Box sx={{ width: width, margin: "auto", height: "100%" }}>
       <Virtuoso

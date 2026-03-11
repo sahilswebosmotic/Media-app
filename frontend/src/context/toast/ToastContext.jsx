@@ -2,9 +2,8 @@ import { Alert, Snackbar } from "@mui/material";
 import {
     useState,
 } from "react";
-import { createContext } from 'react';
 
-export const ToastContext = createContext(null);
+import { ToastContext } from './ToastContextObject';
 
 export const ToastProvider = ({ children }) => {
     const [toast, setToast] = useState({

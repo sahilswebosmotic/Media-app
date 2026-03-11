@@ -37,7 +37,7 @@ export default function LoginForm () {
       login(response)
       showSuccess(`Welcome back!`);
       navigate('/home')
-    } catch (error) {
+    } catch {
       setError('root.apiError', {
         message: 
          'Invalid Credentials. Please try again.',

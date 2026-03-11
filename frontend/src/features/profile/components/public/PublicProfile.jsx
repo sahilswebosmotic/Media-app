@@ -23,8 +23,6 @@ export default function PublicProfile() {
 
   const {
     data: postsResponse,
-    isLoading: postsLoading,
-    isError: postsError,
   } = useGetFeedPostsQuery({
     userId,
     page,

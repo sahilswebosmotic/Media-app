@@ -1,8 +1,8 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { connectSocket, disconnectSocket } from "../utils/socket";
 import { useAuth } from "@features/auth/context/useAuth";
 
-export const SocketContext = createContext(null);
+import { SocketContext } from "./SocketContextObject";
 
 export const SocketProvider = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -11,10 +11,10 @@ export const SocketProvider = ({ children }) => {
   useEffect(() => {
     if (isAuthenticated) {
       const s = connectSocket();  
-      setSocket(s);
+      setTimeout(() => setSocket(s), 0);
     } else {
       disconnectSocket();
-      setSocket(null);
+      setTimeout(() => setSocket(null), 0);
     }
 
     return () => {

@@ -142,7 +142,7 @@ export default function useProfile() {
     profileValues,
     submitError,
     successMessage,
-    handleSubmit: (fn) => (e) => handleFormSubmit(e),
+    handleSubmit: () => (e) => handleFormSubmit(e),
     onSubmit,
     handleEdit,
     handleCancel,

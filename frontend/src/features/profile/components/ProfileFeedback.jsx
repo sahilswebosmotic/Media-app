@@ -6,15 +6,15 @@ export default function ProfileFeedback({ successMessage, submitError, fileError
 
   useEffect(() => {
     if (successMessage) showSuccess(successMessage)
-  }, [successMessage])
+  }, [successMessage, showSuccess])
 
   useEffect(() => {
     if (submitError) showError(submitError)
-  }, [submitError])
+  }, [submitError, showError])
 
   useEffect(() => {
     if (fileErrorMessage) showError(fileErrorMessage)
-  }, [fileErrorMessage])
+  }, [fileErrorMessage, showError])
 
   return null  
 }

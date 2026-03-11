@@ -3,9 +3,8 @@ import Cookies from 'js-cookie'
 import { useLazyGetCurrentUserQuery } from '@features/auth/api/auth.api'
 import { useDispatch } from 'react-redux'
 import { apiSlice } from '@store/api/apiSlice'
-import { createContext } from 'react'
 
-export const AuthContext = createContext(null);
+import { AuthContext } from './AuthContextObject';
 
 export const AuthProvider = ({ children }) => {
   const dispatch = useDispatch()

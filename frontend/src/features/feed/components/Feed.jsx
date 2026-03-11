@@ -44,9 +44,9 @@ export default function Feed() {
     if (!data?.data?.data) return
 
     if (page === 1) {
-      setPosts(data.data.data)
+      setTimeout(() => setPosts(data.data.data), 0)
     } else {
-      setPosts((prev) => [...prev, ...data.data.data])
+      setTimeout(() => setPosts((prev) => [...prev, ...data.data.data]), 0)
     }
   }, [data, page])
 

@@ -1,6 +1,6 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-export const ThemeContext = createContext();
+import { ThemeContext } from './ThemeContextObject';
 
 export const CustomThemeProvider = ({ children }) => {
   const [mode, setMode] = useState(() => {
@@ -17,10 +17,13 @@ export const CustomThemeProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    const SavingMode = ()=>{
     const savedMode = localStorage.getItem('themeMode');
     if (savedMode) {
-      setMode(savedMode);
+      setTimeout(()=>{setMode(savedMode)},0)
     }
+  }
+  SavingMode();
   }, []);
 
   return (
