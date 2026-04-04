@@ -1,6 +1,9 @@
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Paper, Typography, useTheme } from "@mui/material";
 
 const AuthFormCard = ({ title, subtitle, children }) => {
+    const theme = useTheme();
+    const isDark = theme.palette.mode === 'dark';
+
     return (
         <Box
             sx={{
@@ -10,8 +13,7 @@ const AuthFormCard = ({ title, subtitle, children }) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                background:
-                    "radial-gradient(circle at 8% 12%, rgba(14, 165, 233, 0.22), transparent 30%), radial-gradient(circle at 85% 88%, rgba(99, 102, 241, 0.18), transparent 28%), #050a16",
+                background: isDark ? '#000000' : '#fafafa',
             }}
         >
             <Paper
@@ -21,10 +23,12 @@ const AuthFormCard = ({ title, subtitle, children }) => {
                     maxWidth: { xs: 540, sm: 470 },
                     borderRadius: { xs: 3, sm: 4 },
                     border: 1,
-                    borderColor: "rgba(148, 163, 184, 0.22)",
-                    bgcolor: "rgba(15, 23, 42, 0.86)",
-                    backdropFilter: "blur(14px)",
-                    boxShadow: "0 24px 56px rgba(2, 6, 23, 0.5)",
+                    borderColor: isDark ? '#262626' : '#dbdbdb',
+                    bgcolor: isDark ? 'rgba(0, 0, 0, 0.6)' : '#ffffff',
+                    backdropFilter: isDark ? "blur(14px)" : 'none',
+                    boxShadow: isDark 
+                        ? "0 24px 56px rgba(0, 0, 0, 0.5)" 
+                        : "0 2px 10px rgba(0, 0, 0, 0.1)",
                 }}
             >
                 <Box
@@ -39,7 +43,12 @@ const AuthFormCard = ({ title, subtitle, children }) => {
                         variant="h4"
                         textAlign="center"
                         gutterBottom
-                        sx={{ fontSize: { xs: "1.6rem", sm: "2rem" }, fontWeight: 800, letterSpacing: "0.02em" }}
+                        sx={{ 
+                            fontSize: { xs: "1.6rem", sm: "2rem" }, 
+                            fontWeight: 800, 
+                            letterSpacing: "0.02em",
+                            color: 'text.primary'
+                        }}
                     >
                         {title}
                     </Typography>

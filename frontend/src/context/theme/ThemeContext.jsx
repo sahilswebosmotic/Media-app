@@ -68,6 +68,39 @@ export const ThemeContextProvider = ({ children }) => {
             },
           },
         },
+        MuiCheckbox: {
+          styleOverrides: {
+            root: {
+              color: mode === 'dark' ? '#a8a8a8' : '#737373',
+              '&.Mui-checked': {
+                color: mode === 'dark' ? '#ffffff' : '#000000',
+              },
+            },
+          },
+        },
+        MuiTextField: {
+          styleOverrides: {
+            root: {
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: mode === 'dark' ? '#363636' : '#dbdbdb',
+                },
+                '&:hover fieldset': {
+                  borderColor: mode === 'dark' ? '#8e8e8e' : '#a8a8a8',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: mode === 'dark' ? '#ffffff' : '#000000',
+                },
+              },
+              '& .MuiInputLabel-root': {
+                color: mode === 'dark' ? '#a8a8a8' : '#737373',
+              },
+              '& .MuiInputBase-input': {
+                color: mode === 'dark' ? '#ffffff' : '#000000',
+              },
+            },
+          },
+        },
         MuiButton: {
           styleOverrides: {
             root: {
