@@ -1,5 +1,4 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-
 import SignIn from '@pages/SignIn'
 import SignUp from '@pages/SignUp'
 import Home from '@pages/Home'
@@ -9,7 +8,6 @@ import ProtectedRoute from '@components/routes/ProtectedRoute'
 import PublicRoute from '@components/routes/PublicRoute'
 import Discover from '@pages/Discover'
 import { useSocketSync } from '@hooks/useSocketSync'
-
 function App() {
   useSocketSync();
   return (
