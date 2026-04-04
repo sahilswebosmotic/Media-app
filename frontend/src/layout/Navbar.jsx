@@ -22,6 +22,7 @@ import {
 } from '@mui/icons-material';
 import { useThemeContext } from '../context/theme/ThemeContext';
 import { useAuth } from '../context/auth/useAuth';
+import { useGetUserImageQuery } from '../store/slice/usersApi';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -68,6 +69,7 @@ const Navbar = () => {
   const theme = useTheme();
   const { mode, toggleTheme } = useThemeContext();
   const { user } = useAuth();
+  const { data: userImageData } = useGetUserImageQuery();
 
   return (
     <AppBar 
@@ -75,7 +77,8 @@ const Navbar = () => {
       color="inherit" 
       elevation={0} 
       sx={{ 
-        bgcolor: 'background.default',
+        bgcolor: alpha(theme.palette.background.paper, 0.86),
+        backdropFilter: 'blur(10px)',
         borderBottom: `1px solid ${theme.palette.divider}`,
         transition: 'all 0.3s ease',
         zIndex: theme.zIndex.drawer + 1
@@ -87,14 +90,14 @@ const Navbar = () => {
             variant="h6" 
             sx={{ 
               fontWeight: 900, 
-              color: 'primary.main', 
+              color: 'text.primary', 
               display: { xs: 'flex', sm: 'none' }, 
               alignItems: 'center', 
               gap: 1 
             }}
           >
-            <Box sx={{ bgcolor: 'primary.main', width: 28, height: 28, borderRadius: 1, display: 'grid', placeItems: 'center' }}>
-              <Typography variant="caption" sx={{ color: 'white', fontWeight: 900 }}>S</Typography>
+            <Box sx={{ width: 28, height: 28, borderRadius: '8px', display: 'grid', placeItems: 'center', background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)' }}>
+              <Typography variant="caption" sx={{ color: '#ffffff', fontWeight: 900 }}>M</Typography>
             </Box>
           </Typography>
 
@@ -103,7 +106,7 @@ const Navbar = () => {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search SocialApp..."
+              placeholder="Search MediaApp..."
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
@@ -139,14 +142,16 @@ const Navbar = () => {
           </IconButton>
 
           <Avatar 
-            src={user?.profilePhoto} 
+            src={userImageData?.imageData || undefined}
             sx={{ 
               width: { xs: 32, sm: 40 }, 
               height: { xs: 32, sm: 40 }, 
-              border: `2px solid ${theme.palette.primary.main}`,
+              border: `2px solid ${theme.palette.mode === 'dark' ? '#262626' : '#dbdbdb'}`,
               cursor: 'pointer'
             }} 
-          />
+          >
+            {user?.firstname?.[0]?.toUpperCase() || 'U'}
+          </Avatar>
         </Stack>
       </Toolbar>
     </AppBar>

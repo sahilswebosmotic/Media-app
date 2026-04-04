@@ -27,8 +27,31 @@ const postSchema = new mongoose.Schema(
   },
   {
     timestamps: { createdAt: "createdAt" },
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
+
+postSchema.virtual("likesCount", {
+  ref: "likes",
+  localField: "_id",
+  foreignField: "postId",
+  count: true,
+});
+
+postSchema.virtual("commentsCount", {
+  ref: "comments",
+  localField: "_id",
+  foreignField: "postId",
+  count: true,
+});
+
+postSchema.virtual("sharesCount", {
+  ref: "shares",
+  localField: "_id",
+  foreignField: "originalPostId",
+  count: true,
+});
 
 const postModal = mongoose.model("posts", postSchema);
 

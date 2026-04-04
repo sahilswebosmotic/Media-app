@@ -82,6 +82,79 @@ const eventEmitter = async (event, data, isPrivate = false) => {
           io.emit("new-post", data);
         }
         break;
+
+      case "post-liked":
+        io.emit("like-count-update", {
+          postId: data.postId,
+          likesCount: data.likesCount,
+        });
+        if (activeUsers[data.postAuthorId]) {
+          io.to(activeUsers[data.postAuthorId]).emit("post-liked", {
+            postId: data.postId,
+            userId: data.userId,
+            likesCount: data.likesCount,
+          });
+        }
+        break;
+
+      case "post-unliked":
+        io.emit("like-count-update", {
+          postId: data.postId,
+          likesCount: data.likesCount,
+        });
+        break;
+
+      case "new-comment":
+        io.emit("comment-count-update", {
+          postId: data.postId,
+          commentsCount: data.commentsCount,
+        });
+        if (activeUsers[data.postAuthorId]) {
+          io.to(activeUsers[data.postAuthorId]).emit("new-comment", data);
+        }
+        break;
+
+      case "comment-updated":
+        io.emit("comment-updated", data);
+        break;
+
+      case "comment-deleted":
+        io.emit("comment-deleted", data);
+        io.emit("comment-count-update", {
+          postId: data.postId,
+          commentsCount: data.commentsCount,
+        });
+        break;
+
+      case "new-follower":
+        if (activeUsers[data.followingId]) {
+          io.to(activeUsers[data.followingId]).emit("new-follower", {
+            followerId: data.followerId,
+            followersCount: data.followersCount,
+          });
+        }
+        break;
+
+      case "post-shared":
+        io.emit("share-count-update", {
+          postId: data.postId,
+          sharesCount: data.sharesCount,
+        });
+        if (activeUsers[data.postAuthorId]) {
+          io.to(activeUsers[data.postAuthorId]).emit("post-shared", {
+            share: data.share,
+            userId: data.userId,
+            sharesCount: data.sharesCount,
+          });
+        }
+        break;
+
+      case "share-deleted":
+        io.emit("share-count-update", {
+          postId: data.originalPostId,
+          sharesCount: data.sharesCount,
+        });
+        break;
     }
   } catch (e) {
     return e;

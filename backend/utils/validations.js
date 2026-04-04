@@ -1,4 +1,5 @@
 const yup = require("yup");
+const { Types } = require("mongoose");
 
 const validationSchema = {
   firstname: yup
@@ -41,6 +42,29 @@ const validationSchema = {
   filePath: yup.string(),
   title: yup.string().required("Post title is required."),
   description: yup.string(),
+  
+  // Social features validations
+  postId: yup
+    .string()
+    .required("Post ID is required")
+    .test("is-valid-objectid", "Invalid post ID", (value) =>
+      Types.ObjectId.isValid(value)
+    ),
+  userId: yup
+    .string()
+    .required("User ID is required")
+    .test("is-valid-objectid", "Invalid user ID", (value) =>
+      Types.ObjectId.isValid(value)
+    ),
+  commentText: yup
+    .string()
+    .required("Comment text is required")
+    .min(1, "Comment must be at least 1 character")
+    .max(500, "Comment must not exceed 500 characters"),
+  sharedText: yup
+    .string()
+    .optional()
+    .max(200, "Shared text must not exceed 200 characters"),
 };
 
 module.exports = validationSchema;

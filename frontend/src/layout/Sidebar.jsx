@@ -40,7 +40,6 @@ const Sidebar = ({ onCreatePost, onLogout }) => {
   const theme = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
-  const { logout } = useAuth();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   if (isMobile) return null; // We'll handle mobile nav later
@@ -52,19 +51,30 @@ const Sidebar = ({ onCreatePost, onLogout }) => {
         height: '100vh',
         position: 'sticky',
         top: 0,
-        borderRight: `1px solid ${theme.palette.divider}`,
-        px: 2,
-        py: 3,
+        px: 2.5,
+        py: 3.5,
         display: 'flex',
         flexDirection: 'column',
       }}
     >
-      <Box sx={{ px: 2, mb: 4 }}>
-        <Typography variant="h5" sx={{ fontWeight: 900, color: 'primary.main', display: 'flex', alignItems: 'center', gap: 1 }}>
-          <Box sx={{ bgcolor: 'primary.main', width: 32, height: 32, borderRadius: 1, display: 'grid', placeItems: 'center' }}>
-            <Typography variant="caption" sx={{ color: 'white', fontWeight: 900 }}>S</Typography>
+      <Box sx={{ px: 1.5, mb: 3 }}>
+        <Typography variant="h5" sx={{ fontWeight: 900, color: 'text.primary', display: 'flex', alignItems: 'center', gap: 1.2 }}>
+          <Box
+            sx={{
+              width: 34,
+              height: 34,
+              borderRadius: '10px',
+              display: 'grid',
+              placeItems: 'center',
+              background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
+              color: '#ffffff',
+              fontWeight: 900,
+              fontSize: 14,
+            }}
+          >
+            M
           </Box>
-          SocialApp
+          MediaApp
         </Typography>
       </Box>
 
@@ -76,23 +86,24 @@ const Sidebar = ({ onCreatePost, onLogout }) => {
               <ListItemButton
                 onClick={() => navigate(item.path)}
                 sx={{
-                  borderRadius: 8,
-                  py: 1.5,
-                  bgcolor: isActive ? 'rgba(56, 189, 248, 0.1)' : 'transparent',
-                  color: isActive ? 'primary.main' : 'text.primary',
+                  borderRadius: 999,
+                  py: 1.2,
+                  px: 1.6,
+                  bgcolor: isActive ? (theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)') : 'transparent',
+                  color: 'text.primary',
                   '&:hover': {
-                    bgcolor: 'rgba(56, 189, 248, 0.05)',
+                    bgcolor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.06)' : 'rgba(15,20,25,0.06)',
                   },
                 }}
               >
-                <ListItemIcon sx={{ color: isActive ? 'primary.main' : 'text.primary', minWidth: 40 }}>
+                <ListItemIcon sx={{ color: 'text.primary', minWidth: 40 }}>
                   {item.icon}
                 </ListItemIcon>
                 <ListItemText 
                   primary={item.label} 
                   primaryTypographyProps={{ 
                     fontWeight: isActive ? 800 : 600,
-                    fontSize: '1.1rem'
+                    fontSize: '1.02rem'
                   }} 
                 />
               </ListItemButton>
@@ -109,11 +120,12 @@ const Sidebar = ({ onCreatePost, onLogout }) => {
           startIcon={<AddIcon />}
           onClick={onCreatePost}
           sx={{
-            borderRadius: 8,
-            py: 1.5,
-            fontSize: '1rem',
-            fontWeight: 800,
-            boxShadow: theme.shadows[4],
+            borderRadius: '8px',
+            py: 1.3,
+            fontSize: '14px',
+            fontWeight: 600,
+            boxShadow: 'none',
+            textTransform: 'none',
           }}
         >
           Create Post
@@ -124,15 +136,17 @@ const Sidebar = ({ onCreatePost, onLogout }) => {
           size="large"
           startIcon={<LogoutIcon />}
           onClick={onLogout}
-          color="error"
           sx={{
-            borderRadius: 8,
+            borderRadius: '8px',
             py: 1.2,
-            fontSize: '0.9rem',
-            fontWeight: 700,
-            borderWidth: 2,
+            fontSize: '14px',
+            fontWeight: 600,
+            borderColor: theme.palette.mode === 'dark' ? '#363636' : '#dbdbdb',
+            color: theme.palette.mode === 'dark' ? '#ffffff' : '#000000',
+            textTransform: 'none',
             '&:hover': {
-              borderWidth: 2,
+              borderColor: theme.palette.mode === 'dark' ? '#363636' : '#dbdbdb',
+              backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)',
             }
           }}
         >

@@ -5,6 +5,10 @@ const fs = require("fs");
 const path = require("path");
 const { firstname, lastname, username } = require("../utils/validations");
 const postModal = require("../models/posts.modal");
+const likeModel = require("../models/likes.model");
+const commentModel = require("../models/comments.model");
+const shareModel = require("../models/shares.model");
+const followModel = require("../models/follows.model");
 const { getImageBase64 } = require("../utils/getImageData");
 
 const getUser = async (req, res, next) => {
@@ -12,7 +16,9 @@ const getUser = async (req, res, next) => {
     const userJson = await userModel.findById(req.user._id, {
       password: 0,
       isVerified: 0,
-    });
+    })
+    .populate("followersCount")
+    .populate("followingCount");
     return res.status(200).json({
       status: "success",
       data: userJson,
@@ -78,14 +84,16 @@ const getUserProfile = async (req, res, next) => {
     if (!userId) {
       throw new HttpError(400, "User id not provided.");
     }
-    const getUserProfile = await userModel.findById(userId);
+    const getUserProfile = await userModel.findById(userId)
+      .populate("followersCount")
+      .populate("followingCount");
     if (!getUserProfile) {
       throw new HttpError(404, "User not found.");
     }
-    const { firstname, lastname, username, isPrivate } = getUserProfile;
+    const { firstname, lastname, username, isPrivate, followersCount, followingCount } = getUserProfile;
     return res.send({
       status: "success",
-      data: { firstname, lastname, username, isPrivate },
+      data: { firstname, lastname, username, isPrivate, followersCount, followingCount },
     });
   } catch (e) {
     next(e);
@@ -103,13 +111,13 @@ const getAllUsers = async (req, res, next) => {
 
     if (search) {
       searchQuery.$or = [
-        { firstname: { $regex: req.query.searchText, $options: "i" } },
-        { lastname: { $regex: req.query.searchText, $options: "i" } },
+        { firstname: { $regex: search, $options: "i" } },
+        { lastname: { $regex: search, $options: "i" } },
         {
           $expr: {
             $regexMatch: {
               input: { $concat: ["$firstname", " ", "$lastname"] },
-              regex: req.query.searchText,
+              regex: search,
               options: "i",
             },
           },
@@ -141,13 +149,23 @@ const getAllUsers = async (req, res, next) => {
 
 const deleteUser = async (req, res, next) => {
   try {
-    if (fs.existsSync(path.resolve(__dirname, `../uploads/${req.user._id}`))) {
-      await fs.rmSync(path.resolve(__dirname, `../uploads/${req.user._id}`), {
+    const userId = req.user._id;
+
+    if (fs.existsSync(path.resolve(__dirname, `../uploads/${userId}`))) {
+      await fs.rmSync(path.resolve(__dirname, `../uploads/${userId}`), {
         recursive: true,
       });
     }
-    await postModal.deleteMany({ userId: req.user._id });
-    await userModel.findByIdAndDelete(req.user._id);
+
+    await postModal.deleteMany({ userId });
+    await likeModel.deleteMany({ userId });
+    await commentModel.deleteMany({ userId });
+    await shareModel.deleteMany({ userId });
+    await followModel.deleteMany({ 
+      $or: [{ followerId: userId }, { followingId: userId }] 
+    });
+    await userModel.findByIdAndDelete(userId);
+
     res
       .status(200)
       .json({ status: "success", message: "User deleted successfully." });

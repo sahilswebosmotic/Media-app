@@ -32,9 +32,9 @@ const CreatePostInput = ({ onOpenCreateDialog }) => {
   return (
     <Box 
       sx={{ 
-        p: 2, 
+        p: 2.5, 
         borderBottom: `1px solid ${theme.palette.divider}`,
-        bgcolor: theme.palette.mode === 'dark' ? 'rgba(30, 41, 59, 0.4)' : '#fff',
+        bgcolor: 'transparent',
         transition: 'background-color 0.3s ease'
       }}
     >
@@ -52,7 +52,7 @@ const CreatePostInput = ({ onOpenCreateDialog }) => {
             onChange={(e) => setText(e.target.value)}
             onClick={() => onOpenCreateDialog(text)}
             sx={{ 
-              fontSize: { xs: '1.1rem', sm: '1.25rem' }, 
+              fontSize: { xs: '1.05rem', sm: '1.2rem' }, 
               color: 'text.primary',
               py: 0.5,
               '& .MuiInputBase-input': {
@@ -90,7 +90,7 @@ const CreatePostInput = ({ onOpenCreateDialog }) => {
               disabled={!text.trim() && !onOpenCreateDialog}
               onClick={handlePostClick}
               sx={{ 
-                borderRadius: 20, 
+                borderRadius: 999, 
                 px: { xs: 2, sm: 3 }, 
                 py: { xs: 0.5, sm: 1 },
                 fontWeight: 800,

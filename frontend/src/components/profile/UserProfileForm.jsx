@@ -120,33 +120,75 @@ const UserProfileForm = () => {
             <Box sx={{ flexGrow: 1, pb: 1, width: '100%' }}>
               <Stack 
                 direction={{ xs: 'column', sm: 'row' }} 
-                spacing={2} 
+                spacing={1.5} 
                 alignItems="center" 
-                justifyContent={{ xs: 'center', sm: 'flex-start' }}
+                justifyContent={{ xs: 'center', sm: 'space-between' }}
               >
                 <Typography variant="h5" sx={{ fontWeight: 900 }}>
                   {profileValues.username}
                 </Typography>
-                <Stack direction="row" spacing={1}>
-                  <Button 
-                    variant="outlined" 
-                    size="small" 
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  alignItems="center"
+                  sx={{
+                    py: 0.25,
+                    px: 0.25,
+                    borderRadius: 999,
+                    flexWrap: { xs: "wrap", sm: "nowrap" },
+                    justifyContent: "center",
+                  }}
+                >
+                  <Button
+                    variant="outlined"
+                    size="small"
                     onClick={handleEdit}
-                    sx={{ borderRadius: 2, px: 2, fontWeight: 700 }}
+                    sx={{
+                      borderRadius: 999,
+                      px: 2.4,
+                      minHeight: 38,
+                      fontWeight: 700,
+                      borderColor: theme.palette.mode === "dark" ? "rgba(29,155,240,0.45)" : "rgba(29,155,240,0.5)",
+                      color: "text.primary",
+                      bgcolor: "background.paper",
+                      "&:hover": {
+                        borderColor: "primary.main",
+                        bgcolor: theme.palette.mode === "dark" ? "rgba(29,155,240,0.10)" : "rgba(29,155,240,0.08)",
+                      },
+                    }}
                   >
                     Edit profile
                   </Button>
-                  <Button 
-                    variant="outlined" 
-                    size="small" 
-                    color="error" 
+                  <Button
+                    variant="text"
+                    size="small"
+                    color="error"
                     onClick={() => setIsLogoutConfirmOpen(true)}
                     startIcon={<LogoutIcon />}
-                    sx={{ borderRadius: 2, px: 2, fontWeight: 700 }}
+                    sx={{
+                      borderRadius: 999,
+                      px: 1.4,
+                      minHeight: 38,
+                      fontWeight: 700,
+                      color: theme.palette.mode === "dark" ? "rgba(248,113,113,0.9)" : "error.main",
+                      "&:hover": {
+                        bgcolor: theme.palette.mode === "dark" ? "rgba(248,113,113,0.12)" : "rgba(211,47,47,0.08)",
+                      },
+                    }}
                   >
                     Logout
                   </Button>
-                  <IconButton size="small" sx={{ border: `1px solid ${theme.palette.divider}` }}>
+                  <IconButton
+                    size="small"
+                    sx={{
+                      width: 38,
+                      height: 38,
+                      border: `1px solid ${theme.palette.divider}`,
+                      bgcolor: "transparent",
+                      color: "text.secondary",
+                      "&:hover": { bgcolor: theme.palette.action.hover, color: "text.primary" },
+                    }}
+                  >
                     <SettingsIcon fontSize="small" />
                   </IconButton>
                 </Stack>
@@ -159,15 +201,21 @@ const UserProfileForm = () => {
                 sx={{ mt: 2.5 }}
               >
                 <Stack alignItems="center">
-                  <Typography variant="body1" sx={{ fontWeight: 900 }}>42</Typography>
+                  <Typography variant="body1" sx={{ fontWeight: 900 }}>
+                    {currentUser.postsCount || 0}
+                  </Typography>
                   <Typography variant="caption" color="text.secondary">posts</Typography>
                 </Stack>
-                <Stack alignItems="center">
-                  <Typography variant="body1" sx={{ fontWeight: 900 }}>1.2K</Typography>
+                <Stack alignItems="center" sx={{ cursor: 'pointer', '&:hover': { color: 'primary.main' } }}>
+                  <Typography variant="body1" sx={{ fontWeight: 900 }}>
+                    {currentUser.followersCount || 0}
+                  </Typography>
                   <Typography variant="caption" color="text.secondary">followers</Typography>
                 </Stack>
-                <Stack alignItems="center">
-                  <Typography variant="body1" sx={{ fontWeight: 900 }}>840</Typography>
+                <Stack alignItems="center" sx={{ cursor: 'pointer', '&:hover': { color: 'primary.main' } }}>
+                  <Typography variant="body1" sx={{ fontWeight: 900 }}>
+                    {currentUser.followingCount || 0}
+                  </Typography>
                   <Typography variant="caption" color="text.secondary">following</Typography>
                 </Stack>
               </Stack>

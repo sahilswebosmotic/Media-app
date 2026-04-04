@@ -86,7 +86,7 @@ const getFeedPost = async (req, res, next) => {
         $match: searchQuery,
       },
       {
-        $sort: { createdAt: -1 }, // Sorting by createdAt field in descending order
+        $sort: { createdAt: -1 },
       },
       {
         $lookup: {
@@ -107,6 +107,44 @@ const getFeedPost = async (req, res, next) => {
       },
       {
         $unwind: "$userId",
+      },
+      {
+        $lookup: {
+          from: "likes",
+          localField: "_id",
+          foreignField: "postId",
+          as: "likes",
+        },
+      },
+      {
+        $lookup: {
+          from: "comments",
+          localField: "_id",
+          foreignField: "postId",
+          as: "comments",
+        },
+      },
+      {
+        $lookup: {
+          from: "shares",
+          localField: "_id",
+          foreignField: "originalPostId",
+          as: "shares",
+        },
+      },
+      {
+        $addFields: {
+          likesCount: { $size: "$likes" },
+          commentsCount: { $size: "$comments" },
+          sharesCount: { $size: "$shares" },
+        },
+      },
+      {
+        $project: {
+          likes: 0,
+          comments: 0,
+          shares: 0,
+        },
       },
       {
         $skip: Number(page * perPage),
@@ -151,7 +189,10 @@ const getUsersPosts = async (req, res, next) => {
       .populate({
         path: "userId",
         select: "firstname lastname username"
-      });
+      })
+      .populate("likesCount")
+      .populate("commentsCount")
+      .populate("sharesCount");
     return res.status(200).json({
       status: "success",
       data: {

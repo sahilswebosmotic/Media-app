@@ -45,8 +45,24 @@ const userSchema = new mongoose.Schema(
   },
   {
     timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" },
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
+
+userSchema.virtual("followersCount", {
+  ref: "follows",
+  localField: "_id",
+  foreignField: "followingId",
+  count: true,
+});
+
+userSchema.virtual("followingCount", {
+  ref: "follows",
+  localField: "_id",
+  foreignField: "followerId",
+  count: true,
+});
 
 const userModel = mongoose.model("users", userSchema);
 
