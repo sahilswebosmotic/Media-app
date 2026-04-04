@@ -8,7 +8,6 @@ import ProtectedRoute from '@components/routes/ProtectedRoute'
 import PublicRoute from '@components/routes/PublicRoute'
 import Discover from '@pages/Discover'
 import { useSocketSync } from '@hooks/useSocketSync'
-
 function App() {
   useSocketSync();
   return (
