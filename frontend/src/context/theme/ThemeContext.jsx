@@ -29,58 +29,93 @@ export const ThemeContextProvider = ({ children }) => {
       palette: {
         mode,
         primary: {
-          main: '#38bdf8',
-          dark: '#0284c7',
-          light: '#7dd3fc',
+          main: mode === 'dark' ? '#ffffff' : '#000000',
+          dark: mode === 'dark' ? '#e6e6e6' : '#1a1a1a',
+          light: mode === 'dark' ? '#ffffff' : '#333333',
         },
         secondary: {
-          main: '#818cf8',
+          main: mode === 'dark' ? '#a8a8a8' : '#737373',
         },
         background: {
-          default: mode === 'dark' ? '#0F172A' : '#F8FAFC',
-          paper: mode === 'dark' ? 'rgba(30, 41, 59, 0.7)' : '#FFFFFF',
+          default: mode === 'dark' ? '#000000' : '#fafafa',
+          paper: mode === 'dark' ? '#000000' : '#ffffff',
         },
         text: {
-          primary: mode === 'dark' ? '#F1F5F9' : '#1E293B',
-          secondary: mode === 'dark' ? '#94A3B8' : '#64748B',
+          primary: mode === 'dark' ? '#ffffff' : '#000000',
+          secondary: mode === 'dark' ? '#a8a8a8' : '#737373',
         },
+        divider: mode === 'dark' ? '#262626' : '#dbdbdb',
       },
       typography: {
-        fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
-        h1: { fontWeight: 800 },
-        h2: { fontWeight: 800 },
-        h3: { fontWeight: 700 },
+        fontFamily: "'Inter', 'Plus Jakarta Sans', 'Helvetica Neue', sans-serif",
+        h1: { fontWeight: 800, letterSpacing: '-0.02em' },
+        h2: { fontWeight: 800, letterSpacing: '-0.02em' },
+        h3: { fontWeight: 700, letterSpacing: '-0.01em' },
         button: {
           textTransform: 'none',
           fontWeight: 700,
         },
       },
       shape: {
-        borderRadius: 12,
+        borderRadius: 8,
       },
       components: {
+        MuiCssBaseline: {
+          styleOverrides: {
+            body: {
+              backgroundColor: mode === 'dark' ? '#000000' : '#ffffff',
+              backgroundImage: 'none',
+            },
+          },
+        },
         MuiButton: {
           styleOverrides: {
             root: {
-              borderRadius: 10,
-              padding: '8px 16px',
+              textTransform: 'none',
+              fontWeight: 600,
+              fontSize: '14px',
+              borderRadius: '8px',
             },
             containedPrimary: {
-              boxShadow: mode === 'dark' 
-                ? '0 10px 15px -3px rgba(56, 189, 248, 0.2)' 
-                : '0 10px 15px -3px rgba(56, 189, 248, 0.3)',
+              background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
+              color: '#ffffff',
+              padding: '7px 16px',
+              border: 'none',
+              '&:hover': {
+                background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
+                opacity: 0.9,
+              },
+              boxShadow: 'none',
+              '&:active': {
+                opacity: 0.8,
+              },
+            },
+            text: {
+              color: mode === 'dark' ? '#ffffff' : '#000000',
+              padding: '7px 16px',
+              '&:hover': {
+                backgroundColor: mode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)',
+              },
+            },
+            outlined: {
+              padding: '7px 16px',
+              borderColor: mode === 'dark' ? '#363636' : '#dbdbdb',
+              color: mode === 'dark' ? '#ffffff' : '#000000',
+              fontWeight: 600,
+              '&:hover': {
+                borderColor: mode === 'dark' ? '#363636' : '#dbdbdb',
+                backgroundColor: mode === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)',
+              },
             },
           },
         },
         MuiCard: {
           styleOverrides: {
             root: {
-              borderRadius: 16,
-              border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(0, 0, 0, 0.05)',
-              boxShadow: mode === 'dark' 
-                ? '0 4px 6px -1px rgba(0, 0, 0, 0.2)' 
-                : '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
-              backdropFilter: 'blur(8px)',
+              borderRadius: 0,
+              border: mode === 'dark' ? '1px solid #262626' : '1px solid #efefef',
+              backgroundColor: mode === 'dark' ? '#000000' : '#ffffff',
+              boxShadow: 'none',
             },
           },
         },

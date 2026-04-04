@@ -1,6 +1,8 @@
-import React from 'react'
-import { Box, Divider, Grid, Stack, TextField, Typography } from '@mui/material'
+import React, { useState } from 'react'
+import { Box, Divider, Grid, Stack, TextField, Typography, Button, Chip } from '@mui/material'
 import { formatDate } from './profileFormSchema'
+import FollowersDialog from './FollowersDialog'
+import FollowingDialog from './FollowingDialog'
 
 const editFieldSx = {
   '& .MuiInputLabel-root': {
@@ -44,9 +46,61 @@ const ProfileDetailsSection = ({
   email,
   createdAt,
   updatedAt,
+  userId,
+  followersCount = 0,
+  followingCount = 0,
+  postsCount = 0,
 }) => {
+  const [followersOpen, setFollowersOpen] = useState(false);
+  const [followingOpen, setFollowingOpen] = useState(false);
+
   return (
     <Stack spacing={2}>
+      {/* Stats Section */}
+      {!isEditing && (
+        <Box
+          sx={{
+            p: 2,
+            borderRadius: 2,
+            bgcolor: 'rgba(56, 189, 248, 0.08)',
+            border: '1px solid rgba(56, 189, 248, 0.22)',
+          }}
+        >
+          <Stack direction="row" spacing={3} justifyContent="center">
+            <Box sx={{ textAlign: 'center' }}>
+              <Typography variant="h6" sx={{ fontWeight: 700 }}>
+                {postsCount || 0}
+              </Typography>
+              <Typography variant="caption" color="text.secondary">
+                Posts
+              </Typography>
+            </Box>
+            <Box
+              sx={{ textAlign: 'center', cursor: 'pointer' }}
+              onClick={() => setFollowersOpen(true)}
+            >
+              <Typography variant="h6" sx={{ fontWeight: 700, '&:hover': { color: 'primary.main' } }}>
+                {followersCount || 0}
+              </Typography>
+              <Typography variant="caption" color="text.secondary">
+                Followers
+              </Typography>
+            </Box>
+            <Box
+              sx={{ textAlign: 'center', cursor: 'pointer' }}
+              onClick={() => setFollowingOpen(true)}
+            >
+              <Typography variant="h6" sx={{ fontWeight: 700, '&:hover': { color: 'primary.main' } }}>
+                {followingCount || 0}
+              </Typography>
+              <Typography variant="caption" color="text.secondary">
+                Following
+              </Typography>
+            </Box>
+          </Stack>
+        </Box>
+      )}
+
       {isEditing ? (
         <Box
           sx={{
@@ -119,6 +173,17 @@ const ProfileDetailsSection = ({
           <Typography variant="body2">{formatDate(updatedAt)}</Typography>
         </Grid>
       </Grid>
+
+      <FollowersDialog
+        open={followersOpen}
+        onClose={() => setFollowersOpen(false)}
+        userId={userId}
+      />
+      <FollowingDialog
+        open={followingOpen}
+        onClose={() => setFollowingOpen(false)}
+        userId={userId}
+      />
     </Stack>
   )
 }

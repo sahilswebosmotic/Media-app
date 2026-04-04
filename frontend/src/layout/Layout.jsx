@@ -8,6 +8,7 @@ import MobileNav from './MobileNav'
 import CreatePostDialog from '../components/feed/CreatePostDialog/CreatePostDialog'
 import LogoutConfirmationDialog from '../components/common/LogoutConfirmationDialog'
 import { useAuth } from '../context/auth/useAuth'
+import { useSocialSocketListeners } from '../hooks/useSocialSocketListeners'
 
 const Layout = () => {
   const theme = useTheme();
@@ -17,6 +18,9 @@ const Layout = () => {
   const [initialPostText, setInitialPostText] = React.useState('');
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+
+  // Listen to socket.io events for real-time updates
+  useSocialSocketListeners();
 
   return (
     <Box
@@ -49,9 +53,13 @@ const Layout = () => {
             component="main" 
             sx={{ 
               flexGrow: 1, 
-              borderRight: `1px solid ${theme.palette.divider}`,
               minWidth: 0,
-              width: '100%'
+              width: '100%',
+              maxWidth: 760,
+              mx: 'auto',
+              borderLeft: { xs: 'none', md: `1px solid ${theme.palette.divider}` },
+              borderRight: { xs: 'none', md: `1px solid ${theme.palette.divider}` },
+              bgcolor: 'background.paper',
             }}
           >
             <Navbar />
